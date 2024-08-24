@@ -1,0 +1,926 @@
+[gd_scene load_steps=33 format=3 uid="uid://dsp56xvtfbl5j"]
+
+[ext_resource type="Script" path="res://scripts/Upgrades.gd" id="1_u5t8t"]
+[ext_resource type="Texture2D" uid="uid://b76svl5my0r0i" path="res://assets/Bg/Space Background.png" id="2_2v2vu"]
+[ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="3_lxpsi"]
+[ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="4_jd65x"]
+[ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="4_x80sa"]
+[ext_resource type="FontFile" uid="uid://d36km58u0gqxp" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="6_yikh3"]
+[ext_resource type="Texture2D" uid="uid://c2t0jx7gov8v2" path="res://assets/CoinText.tres" id="7_hdw86"]
+[ext_resource type="StyleBox" uid="uid://b2o1gjf3dwt1a" path="res://PanelStyleBox.tres" id="7_vrnrl"]
+[ext_resource type="Texture2D" uid="uid://pjq48voy3q0" path="res://assets/Icons/HealthBG.png" id="9_ine72"]
+[ext_resource type="Texture2D" uid="uid://d0qgekxhutdp1" path="res://assets/Icons/HealthRegenBG.png" id="11_rm6h4"]
+[ext_resource type="LabelSettings" uid="uid://coekrlylowlbs" path="res://SpacedOutlinedFont.tres" id="12_47rn7"]
+[ext_resource type="Texture2D" uid="uid://dx0y7kaox02km" path="res://assets/Icons/ArmorBG.png" id="12_u5ju7"]
+[ext_resource type="FontFile" uid="uid://ch0fa8ytvrsm2" path="res://assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="12_uerqn"]
+[ext_resource type="Texture2D" uid="uid://bo5u5q6ce1xoc" path="res://assets/Icons/DamageBG.png" id="13_e074o"]
+[ext_resource type="Texture2D" uid="uid://bm5ikl7jwkjr7" path="res://assets/Icons/AttackSpeedBG.png" id="14_5ql1c"]
+[ext_resource type="Texture2D" uid="uid://y50wupw233a6" path="res://assets/Icons/AttackSizeBG.png" id="15_h7it4"]
+[ext_resource type="Texture2D" uid="uid://dpnfrfx8mwm3m" path="res://assets/Icons/MoveSpeedBG.png" id="16_em02m"]
+[ext_resource type="Texture2D" uid="uid://b43vddvrqc2fn" path="res://assets/Icons/ReviveBG.png" id="17_armln"]
+[ext_resource type="FontFile" uid="uid://37n3hdxauwek" path="res://assets/kenney_kenney-fonts/Fonts/Kenney High Square.ttf" id="18_w4a4j"]
+[ext_resource type="Texture2D" uid="uid://bhybqsncvcc5l" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_gradient.svg" id="20_dcgjy"]
+[ext_resource type="FontFile" uid="uid://kd5p401f4xkj" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="20_kplna"]
+[ext_resource type="Texture2D" uid="uid://dljsnea7xehje" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_flat.svg" id="21_wq83r"]
+[ext_resource type="Texture2D" uid="uid://3h2lffcmhk0r" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_gloss.svg" id="22_jek3j"]
+[ext_resource type="FontFile" uid="uid://by0ttegopkj4w" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel Square.ttf" id="23_keluk"]
+[ext_resource type="Texture2D" uid="uid://cimkj0cn3yqwg" path="res://assets/Coin_Gems/MonedaD.png" id="23_qre5f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjaet"]
+font = ExtResource("6_yikh3")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_utsxb"]
+line_spacing = 2.0
+font = ExtResource("6_yikh3")
+font_size = 64
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ib6ir"]
+font = ExtResource("12_uerqn")
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kh6ew"]
+font = ExtResource("18_w4a4j")
+font_size = 36
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aqrm0"]
+font = ExtResource("20_kplna")
+font_size = 48
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_211pl"]
+font = ExtResource("23_keluk")
+font_size = 44
+font_color = Color(0.90469, 0.798382, 0.191202, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs2mc"]
+atlas = ExtResource("23_qre5f")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_u5t8t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2v2vu")
+
+[node name="ReturnButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 72.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_x80sa")
+texture_hover = ExtResource("4_jd65x")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ReturnButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -32.0
+offset_right = 80.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_vjaet")
+
+[node name="TopPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 120.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TopPanel/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_hdw86")
+stretch_mode = 6
+
+[node name="GoldLabel" type="Label" parent="TopPanel/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+label_settings = SubResource("LabelSettings_utsxb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -302.0
+offset_right = 500.0
+offset_bottom = 302.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(1000, 450)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+alignment = 1
+
+[node name="HealthPanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/HealthPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/HealthPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 19.0
+offset_right = 87.0
+offset_bottom = 61.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Max Health"
+label_settings = ExtResource("12_47rn7")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/HealthPanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ine72")
+
+[node name="HealthPriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/HealthPanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/HealthPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="HealthRegenPanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/HealthRegenPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/HealthRegenPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 19.0
+offset_right = 90.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Health Regen"
+label_settings = ExtResource("12_47rn7")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/HealthRegenPanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_rm6h4")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/HealthRegenPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="HealthRegenPriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/HealthRegenPanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="ArmorPanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/ArmorPanel"]
+layout_mode = 2
+
+[node name="ArmorPriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/ArmorPanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/ArmorPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 19.0
+offset_right = 48.0
+offset_bottom = 61.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Armor"
+label_settings = ExtResource("12_47rn7")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/ArmorPanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_u5ju7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/ArmorPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="DamagePanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/DamagePanel"]
+layout_mode = 2
+
+[node name="DamagePriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/DamagePanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/DamagePanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_e074o")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/DamagePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.5
+offset_top = 19.0
+offset_right = 50.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Damage"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/DamagePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="AtkSpeedPanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/AtkSpeedPanel"]
+layout_mode = 2
+
+[node name="AtkSpeedPriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/AtkSpeedPanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -79.0
+offset_right = 96.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/AtkSpeedPanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_5ql1c")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/AtkSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 19.0
+offset_right = 90.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Attack Speed
+"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/AtkSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="AttackSizePanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/AttackSizePanel"]
+layout_mode = 2
+
+[node name="AtkSizePriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/AttackSizePanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/AttackSizePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Attack Size"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/AttackSizePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/AttackSizePanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_h7it4")
+
+[node name="MoveSpeedPanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/MoveSpeedPanel"]
+layout_mode = 2
+
+[node name="MoveSpeedPriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/MoveSpeedPanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/MoveSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 19.0
+offset_right = 77.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Move Speed"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/MoveSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/MoveSpeedPanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_em02m")
+
+[node name="RevivePanel" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(240, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/FlowContainer/RevivePanel"]
+layout_mode = 2
+
+[node name="RevivePriceButton" type="TextureButton" parent="VBoxContainer/FlowContainer/RevivePanel/Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/RevivePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = 19.0
+offset_right = 42.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Revive"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/FlowContainer/RevivePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -59.0
+offset_right = 35.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0/1"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/FlowContainer/RevivePanel/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -48.0
+offset_right = 49.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_armln")
+
+[node name="HoverPanel" type="Control" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(1000, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DescriptionPanel" type="PanelContainer" parent="VBoxContainer/HoverPanel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="VBoxContainer/HoverPanel/DescriptionPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 49.0
+offset_top = 26.0
+offset_right = 219.0
+offset_bottom = 201.0
+theme_override_constants/separation = 15
+
+[node name="UpgradeName" type="Label" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+label_settings = SubResource("LabelSettings_kh6ew")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 128)
+layout_mode = 2
+
+[node name="UpgradeDescription" type="Label" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -12.5
+offset_right = 0.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+label_settings = SubResource("LabelSettings_aqrm0")
+
+[node name="BuyButton" type="TextureButton" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -32.0
+offset_right = -17.9999
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("20_dcgjy")
+texture_pressed = ExtResource("21_wq83r")
+texture_hover = ExtResource("22_jek3j")
+
+[node name="UpgradePrice" type="Label" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control/BuyButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -28.0
+offset_right = 0.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_211pl")
+
+[node name="CoinTexture" type="TextureRect" parent="VBoxContainer/HoverPanel/DescriptionPanel/Control/BuyButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_rs2mc")

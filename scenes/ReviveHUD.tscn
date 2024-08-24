@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://b75kfnx44sdn0"]
+
+[ext_resource type="Script" path="res://scripts/reviveHud.gd" id="1_4ghqm"]
+[ext_resource type="Texture2D" uid="uid://ce8btrom2rdhf" path="res://assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="1_8c32v"]
+[ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="1_m0a73"]
+[ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="2_bwvy3"]
+[ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="3_sdgt4"]
+[ext_resource type="LabelSettings" uid="uid://coekrlylowlbs" path="res://SpacedOutlinedFont.tres" id="6_vq4jg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yoem"]
+atlas = ExtResource("1_8c32v")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v5yob"]
+texture = SubResource("AtlasTexture_5yoem")
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_4ghqm")
+
+[node name="ReviveHUD" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="ReviveHUD"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_v5yob")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviveHUD/PanelContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Revive" type="TextureButton" parent="ReviveHUD/PanelContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_m0a73")
+texture_pressed = ExtResource("2_bwvy3")
+texture_hover = ExtResource("3_sdgt4")
+
+[node name="Label" type="Label" parent="ReviveHUD/PanelContainer/VBoxContainer/Revive"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -11.5
+offset_right = 25.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Revive"
+label_settings = ExtResource("6_vq4jg")
+
+[node name="Quit" type="TextureButton" parent="ReviveHUD/PanelContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_m0a73")
+texture_pressed = ExtResource("2_bwvy3")
+texture_hover = ExtResource("3_sdgt4")
+
+[node name="Label" type="Label" parent="ReviveHUD/PanelContainer/VBoxContainer/Quit"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cancel"
+label_settings = ExtResource("6_vq4jg")
+metadata/_edit_use_anchors_ = true

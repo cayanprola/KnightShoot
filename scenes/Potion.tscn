@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnaukp13y0uiq"]
+
+[ext_resource type="Script" path="res://scripts/Potion.gd" id="1_fvife"]
+[ext_resource type="Texture2D" uid="uid://jq4b7tshtedg" path="res://assets/Shikashi's Fantasy Icons Pack v2/#2 - Transparent Icons & Drop Shadow.png" id="1_scfg6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fhc1"]
+atlas = ExtResource("1_scfg6")
+region = Rect2(132, 290, 28, 28)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ym6yc"]
+radius = 14.0
+
+[node name="Potion" type="Area2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_fvife")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_6fhc1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("CapsuleShape2D_ym6yc")

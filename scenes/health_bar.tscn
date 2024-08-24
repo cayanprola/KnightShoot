@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckx73g6ew4e3t"]
+
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_63f5x"]
+[ext_resource type="Texture2D" uid="uid://dsygyhfbj3q0r" path="res://assets/Pixel Health Bar/Bar/no health bar.png" id="2_6aj3b"]
+[ext_resource type="Texture2D" uid="uid://cxlt0jrkloggu" path="res://assets/Pixel Health Bar/Bar/empty health bar.png" id="2_uorof"]
+[ext_resource type="Texture2D" uid="uid://b4jgbd28rfkdv" path="res://assets/Pixel Health Bar/Health/health.png" id="4_vsnt0"]
+
+[node name="HealthBar" type="Node2D"]
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_63f5x")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_top = -1.0
+offset_right = 128.0
+offset_bottom = 39.0
+texture_under = ExtResource("2_6aj3b")
+texture_over = ExtResource("2_uorof")
+texture_progress = ExtResource("4_vsnt0")

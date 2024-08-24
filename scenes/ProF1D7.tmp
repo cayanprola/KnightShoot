@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpbxtf4hs8obx"]
+
+[ext_resource type="Script" path="res://scripts/ProcGenWorld.gd" id="1_j0d31"]
+[ext_resource type="TileSet" uid="uid://jgwtljy3c4el" path="res://assets/KenneyTileSet.tres" id="2_47oim"]
+
+[node name="ProcGenWorld" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_j0d31")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_47oim")
+format = 2
+layer_0/name = "Background"
+layer_0/tile_data = PackedInt32Array(-3342341, 393218, 0, -3276805, 393218, 1, -3211269, 393218, 2, -3145733, 393218, 3, -3342340, 458754, 0, -3276804, 458754, 1, -3211268, 458754, 2, -3145732, 458754, 3, -3342339, 524290, 0, -3276803, 524290, 1, -3211267, 524290, 2, -3145731, 524290, 3, -3342338, 589826, 0, -3276802, 589826, 1, -3211266, 589826, 2, -3145730, 589826, 3)
+layer_1/name = "Foreground"
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Chunks" type="Node2D" parent="."]

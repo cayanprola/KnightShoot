@@ -1,0 +1,646 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsp56xvtfbl5j"]
+
+[ext_resource type="Script" path="res://Upgrades.gd" id="1_sq0l7"]
+[ext_resource type="Texture2D" uid="uid://b76svl5my0r0i" path="res://assets/Bg/Space Background.png" id="2_2v2vu"]
+[ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="3_lxpsi"]
+[ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="4_jd65x"]
+[ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="4_x80sa"]
+[ext_resource type="FontFile" uid="uid://d36km58u0gqxp" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="6_yikh3"]
+[ext_resource type="StyleBox" uid="uid://b2o1gjf3dwt1a" path="res://PanelStyleBox.tres" id="7_vrnrl"]
+[ext_resource type="LabelSettings" uid="uid://coekrlylowlbs" path="res://PanelFonts.tres" id="12_47rn7"]
+[ext_resource type="FontFile" uid="uid://ch0fa8ytvrsm2" path="res://assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="12_uerqn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjaet"]
+font = ExtResource("6_yikh3")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_utsxb"]
+line_spacing = 2.0
+font = ExtResource("6_yikh3")
+font_size = 64
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ib6ir"]
+font = ExtResource("12_uerqn")
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_sq0l7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_2v2vu")
+
+[node name="ReturnButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 72.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_x80sa")
+texture_hover = ExtResource("4_jd65x")
+
+[node name="Label" type="Label" parent="ReturnButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -27.0
+offset_right = 80.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_vjaet")
+
+[node name="TopPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+
+[node name="GoldLabel" type="Label" parent="TopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_utsxb")
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+custom_minimum_size = Vector2(900, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -379.0
+offset_right = 450.0
+offset_bottom = 379.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HealthContainer" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/HealthContainer"]
+layout_mode = 2
+
+[node name="HealthPriceButton" type="TextureButton" parent="FlowContainer/HealthContainer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/HealthContainer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 19.0
+offset_right = 77.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Max Health"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/HealthContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="HealthRegenPanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/HealthRegenPanel"]
+layout_mode = 2
+
+[node name="HealthRegenPriceButton" type="TextureButton" parent="FlowContainer/HealthRegenPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/HealthRegenPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 19.0
+offset_right = 90.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Health Regen"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/HealthRegenPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="ArmorPanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/ArmorPanel"]
+layout_mode = 2
+
+[node name="ArmorPriceButton" type="TextureButton" parent="FlowContainer/ArmorPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/ArmorPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = 19.0
+offset_right = 42.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Armor"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/ArmorPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="DamagePanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/DamagePanel"]
+layout_mode = 2
+
+[node name="DamagePriceButton" type="TextureButton" parent="FlowContainer/DamagePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/DamagePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.5
+offset_top = 19.0
+offset_right = 50.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Damage"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/DamagePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="AtkSpeedPanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/AtkSpeedPanel"]
+layout_mode = 2
+
+[node name="AtkSpeedPriceButton" type="TextureButton" parent="FlowContainer/AtkSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/AtkSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 19.0
+offset_right = 90.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Attack Speed
+"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/AtkSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="AttackSizePanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/AttackSizePanel"]
+layout_mode = 2
+
+[node name="AtkSizePriceButton" type="TextureButton" parent="FlowContainer/AttackSizePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/AttackSizePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Attack Size"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/AttackSizePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="CooldownPanel" type="PanelContainer" parent="FlowContainer"]
+visible = false
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/CooldownPanel"]
+layout_mode = 2
+
+[node name="CooldownPriceButton" type="TextureButton" parent="FlowContainer/CooldownPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/CooldownPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.5
+offset_top = 19.0
+offset_right = 66.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Cooldown"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/CooldownPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="MoveSpeedPanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/MoveSpeedPanel"]
+layout_mode = 2
+
+[node name="MoveSpeedPriceButton" type="TextureButton" parent="FlowContainer/MoveSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/MoveSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 19.0
+offset_right = 77.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Move Speed"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/MoveSpeedPanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/5"
+label_settings = SubResource("LabelSettings_ib6ir")
+
+[node name="RevivePanel" type="PanelContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_vrnrl")
+
+[node name="Control" type="Control" parent="FlowContainer/RevivePanel"]
+layout_mode = 2
+
+[node name="RevivePriceButton" type="TextureButton" parent="FlowContainer/RevivePanel/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -78.0
+offset_right = 96.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_lxpsi")
+texture_pressed = ExtResource("4_jd65x")
+texture_hover = ExtResource("4_x80sa")
+
+[node name="Label" type="Label" parent="FlowContainer/RevivePanel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = 19.0
+offset_right = 42.5
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Revive"
+label_settings = ExtResource("12_47rn7")
+
+[node name="QuantityLabel" type="Label" parent="FlowContainer/RevivePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 35.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "0/1"
+label_settings = SubResource("LabelSettings_ib6ir")

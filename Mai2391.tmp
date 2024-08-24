@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://m4hx1ig8baq0"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_dhy1j"]
+[ext_resource type="PackedScene" uid="uid://bavkarbejk6iy" path="res://Player.tscn" id="1_rdnw5"]
+[ext_resource type="PackedScene" uid="uid://dtgs123aydol6" path="res://Map.tscn" id="3_ys1qx"]
+[ext_resource type="PackedScene" uid="uid://584fjvi3ddiy" path="res://mob_spawner.tscn" id="5_b001q"]
+
+[sub_resource type="GDScript" id="GDScript_wjvp1"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_dhy1j")
+
+[node name="TileMap" parent="." instance=ExtResource("3_ys1qx")]
+
+[node name="Player" parent="." instance=ExtResource("1_rdnw5")]
+floor_constant_speed = true
+
+[node name="MobSpawner" parent="." instance=ExtResource("5_b001q")]
+initial_spawn_interval = 0.8
+max_mobs = 200
+min_spawn_radius = 150
+max_wave_mobs = 200
+min_spawn_interval = 0.3
+
+[node name="Button" type="Button" parent="."]
+visible = false
+clip_contents = true
+offset_left = 724.528
+offset_top = -266.038
+offset_right = 809.683
+offset_bottom = -235.038
+scale = Vector2(1.525, 1.525)
+toggle_mode = true
+text = "Kill player"
+script = SubResource("GDScript_wjvp1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7a1s1neooxey"]
+
+[ext_resource type="Script" path="res://scripts/PurpleLaser.gd" id="1_3te0v"]
+[ext_resource type="Texture2D" uid="uid://cpsu88mrlgq5y" path="res://assets/Laser Sprites/03.png" id="1_je3fh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c214y"]
+
+[node name="PurpleLaser" type="Area2D"]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("1_3te0v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_je3fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.5708
+scale = Vector2(0.668999, 0.924267)
+shape = SubResource("CircleShape2D_c214y")

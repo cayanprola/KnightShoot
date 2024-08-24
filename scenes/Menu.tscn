@@ -1,0 +1,176 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnhnhy08ygo17"]
+
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_2lq16"]
+[ext_resource type="Texture2D" uid="uid://b76svl5my0r0i" path="res://assets/Bg/Space Background.png" id="2_q6u2m"]
+[ext_resource type="Texture2D" uid="uid://b8nf0mun666g6" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_gradient.svg" id="3_xo40b"]
+[ext_resource type="Texture2D" uid="uid://bgk520huev3lg" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="4_jp7w3"]
+[ext_resource type="Texture2D" uid="uid://8pfhpewa60eu" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="5_ibeku"]
+[ext_resource type="FontFile" uid="uid://d36km58u0gqxp" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="6_es6tb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lky7d"]
+line_spacing = 2.0
+font = ExtResource("6_es6tb")
+font_size = 46
+outline_size = 4
+outline_color = Color(0.00351917, 0.00351917, 0.00351917, 1)
+shadow_size = 4
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2lq16")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_q6u2m")
+
+[node name="StartButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -190.0
+offset_right = 175.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_xo40b")
+texture_pressed = ExtResource("5_ibeku")
+texture_hover = ExtResource("4_jp7w3")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="StartButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -11.5
+offset_right = 19.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+label_settings = SubResource("LabelSettings_lky7d")
+
+[node name="UpgradesButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = 10.0
+offset_right = 175.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_xo40b")
+texture_pressed = ExtResource("5_ibeku")
+texture_hover = ExtResource("4_jp7w3")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UpgradesButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -26.0
+offset_right = 154.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrades"
+label_settings = SubResource("LabelSettings_lky7d")
+
+[node name="OptionsButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = 110.0
+offset_right = 175.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_xo40b")
+texture_pressed = ExtResource("5_ibeku")
+texture_hover = ExtResource("4_jp7w3")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="OptionsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_lky7d")
+
+[node name="ExitButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = 210.0
+offset_right = 175.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_xo40b")
+texture_pressed = ExtResource("5_ibeku")
+texture_hover = ExtResource("4_jp7w3")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ExitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+label_settings = SubResource("LabelSettings_lky7d")

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://m4hx1ig8baq0"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_dhy1j"]
+[ext_resource type="PackedScene" uid="uid://bavkarbejk6iy" path="res://Player.tscn" id="1_rdnw5"]
+[ext_resource type="PackedScene" uid="uid://dtgs123aydol6" path="res://Map.tscn" id="3_ys1qx"]
+[ext_resource type="PackedScene" uid="uid://fmqfq75j4y1t" path="res://Orc.tscn" id="4_38aud"]
+
+[sub_resource type="GDScript" id="GDScript_wjvp1"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_dhy1j")
+
+[node name="TileMap" parent="." instance=ExtResource("3_ys1qx")]
+
+[node name="Player" parent="." instance=ExtResource("1_rdnw5")]
+
+[node name="Button" type="Button" parent="."]
+clip_contents = true
+offset_left = 724.528
+offset_top = -266.038
+offset_right = 809.683
+offset_bottom = -235.038
+scale = Vector2(1.525, 1.525)
+toggle_mode = true
+text = "Kill player"
+script = SubResource("GDScript_wjvp1")
+
+[node name="Orc" parent="." instance=ExtResource("4_38aud")]
+position = Vector2(-391, -187)
+
+[node name="Orc2" parent="." instance=ExtResource("4_38aud")]
+position = Vector2(45, -203)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

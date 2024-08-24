@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://584fjvi3ddiy"]
+
+[ext_resource type="Script" path="res://scripts/MobSpawner.gd" id="1_wf7qu"]
+
+[node name="MobSpawner" type="Node2D"]
+script = ExtResource("1_wf7qu")
+max_spawn_radius = 1600

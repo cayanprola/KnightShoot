@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwxkxbnjkqluo"]
+
+[ext_resource type="Texture2D" uid="uid://bxd27c8a7yuph" path="res://assets/32x32pixelmeleeweapon.png" id="1_71r44"]
+[ext_resource type="Script" path="res://scripts/Knife.gd" id="1_d0ohe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6w50"]
+atlas = ExtResource("1_71r44")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk6e5"]
+size = Vector2(40, 9.09091)
+
+[node name="Knife" type="Area2D"]
+texture_filter = 1
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("1_d0ohe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_u6w50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 5.96046e-08)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("RectangleShape2D_hk6e5")

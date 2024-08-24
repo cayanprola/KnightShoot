@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://b43lgj5ltw4c6"]
+
+[ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="1_acxef"]
+[ext_resource type="Texture2D" uid="uid://ce8btrom2rdhf" path="res://assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="2_creej"]
+[ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="2_wcfwn"]
+[ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="3_67rbi"]
+[ext_resource type="LabelSettings" uid="uid://42yruh7l0jag" path="res://PixelFont.tres" id="3_keima"]
+[ext_resource type="FontFile" uid="uid://kd5p401f4xkj" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="3_t46u5"]
+[ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="4_ow424"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8du6g"]
+atlas = ExtResource("2_creej")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tp2t5"]
+texture = SubResource("AtlasTexture_8du6g")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3tx5v"]
+font = ExtResource("3_t46u5")
+font_size = 150
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_acxef")
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tp2t5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_3tx5v")
+
+[node name="Continue" type="TextureButton" parent="Control/PanelContainer/VBoxContainer"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_wcfwn")
+texture_pressed = ExtResource("3_67rbi")
+texture_hover = ExtResource("4_ow424")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/Continue"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -11.5
+offset_right = 50.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
+label_settings = ExtResource("3_keima")
+
+[node name="Quit" type="TextureButton" parent="Control/PanelContainer/VBoxContainer"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_wcfwn")
+texture_pressed = ExtResource("3_67rbi")
+texture_hover = ExtResource("4_ow424")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/Quit"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -11.5
+offset_right = 23.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = ExtResource("3_keima")
+
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

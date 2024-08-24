@@ -1,0 +1,128 @@
+[gd_scene load_steps=19 format=3 uid="uid://bphi21n3ltupi"]
+
+[ext_resource type="Script" path="res://scripts/Mob.gd" id="1_jgrtr"]
+[ext_resource type="Texture2D" uid="uid://cov0cv8w26mvr" path="res://assets/Crow Animations/crow_death1.png" id="1_s0mre"]
+[ext_resource type="PackedScene" uid="uid://cfbact83ipiwo" path="res://scenes/RedGem.tscn" id="2_dxwlb"]
+[ext_resource type="Texture2D" uid="uid://biwjxq5ialwat" path="res://assets/Crow Animations/crow_damage.png" id="2_s8jql"]
+[ext_resource type="Texture2D" uid="uid://ctpnja2l8tabx" path="res://assets/Crow Animations/crow_walk.png" id="3_lplk1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko3ox"]
+atlas = ExtResource("1_s0mre")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obdev"]
+atlas = ExtResource("1_s0mre")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fr8w"]
+atlas = ExtResource("1_s0mre")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k4ah"]
+atlas = ExtResource("1_s0mre")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou3q6"]
+atlas = ExtResource("1_s0mre")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vbyh"]
+atlas = ExtResource("2_s8jql")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0757r"]
+atlas = ExtResource("2_s8jql")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqbtp"]
+atlas = ExtResource("2_s8jql")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl743"]
+atlas = ExtResource("3_lplk1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn7bi"]
+atlas = ExtResource("3_lplk1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0dcl"]
+atlas = ExtResource("3_lplk1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfop3"]
+atlas = ExtResource("3_lplk1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8txvg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko3ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obdev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fr8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k4ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou3q6")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vbyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0757r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqbtp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vbyh")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl743")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn7bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0dcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfop3")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Crow" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_jgrtr")
+gem_scene = ExtResource("2_dxwlb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8txvg")
+animation = &"Walk"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-18, 15, -25, 31, 18, 32, 18, 20, 13, 16, 13, -4, 11, -24, -9, -24)

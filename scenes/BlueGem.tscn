@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://beh3f8vg640xc"]
+
+[ext_resource type="Script" path="res://scripts/XpGems.gd" id="1_og8tf"]
+[ext_resource type="Texture2D" uid="uid://dv5agam1koy4c" path="res://assets/Coin_Gems/spr_coin_azu.png" id="2_bwif2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5x21"]
+atlas = ExtResource("2_bwif2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4siga"]
+atlas = ExtResource("2_bwif2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wap03"]
+atlas = ExtResource("2_bwif2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4a5j"]
+atlas = ExtResource("2_bwif2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dlriy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5x21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4siga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wap03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4a5j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eoa1u"]
+radius = 5.55555
+
+[node name="BlueXpGem" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 16
+script = ExtResource("1_og8tf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dlriy")
+frame_progress = 0.0123117
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.831593, 1.12)
+shape = SubResource("CircleShape2D_eoa1u")

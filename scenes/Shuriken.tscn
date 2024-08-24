@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://rn5d2wlyn374"]
+
+[ext_resource type="Texture2D" uid="uid://c4f4d5d0l4axj" path="res://assets/Trap and Weapon/00 All.png" id="1_3c0cw"]
+[ext_resource type="Script" path="res://scripts/Shuriken.gd" id="1_uv2wq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpcgx"]
+atlas = ExtResource("1_3c0cw")
+region = Rect2(336, 352, 48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3uot"]
+size = Vector2(46, 46)
+
+[node name="Shuriken" type="Area2D"]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("1_uv2wq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_kpcgx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i3uot")

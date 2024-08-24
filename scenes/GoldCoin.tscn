@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw017vti4gx2u"]
+
+[ext_resource type="Script" path="res://scripts/GoldCoin.gd" id="1_csqoi"]
+[ext_resource type="Texture2D" uid="uid://cimkj0cn3yqwg" path="res://assets/Coin_Gems/MonedaD.png" id="1_mqx2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rarkc"]
+atlas = ExtResource("1_mqx2g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q83w4"]
+radius = 8.0
+height = 20.0
+
+[node name="GoldCoin" type="Area2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_csqoi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_rarkc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("CapsuleShape2D_q83w4")
