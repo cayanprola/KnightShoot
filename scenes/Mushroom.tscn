@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4soisdx0nekv"]
+[gd_scene load_steps=24 format=3 uid="uid://b4soisdx0nekv"]
 
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_bjd7p"]
 [ext_resource type="Texture2D" uid="uid://81a47c8p3oac" path="res://assets/Monsters_Creatures_Fantasy/Mushroom/Death.png" id="1_xwux1"]
@@ -136,17 +136,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bo37x"]
+
 [node name="Mushroom" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_bjd7p")
 gem_scene = ExtResource("2_lbf7y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_a252g")
 animation = &"Walk"
 frame_progress = 0.784804
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-12, -13, -12, 28, 13, 28, 13, -13)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 9)
+scale = Vector2(1.88101, 3.45116)
+shape = SubResource("CircleShape2D_bo37x")

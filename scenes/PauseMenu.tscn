@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b43lgj5ltw4c6"]
+[gd_scene load_steps=12 format=3 uid="uid://b43lgj5ltw4c6"]
 
 [ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="1_acxef"]
 [ext_resource type="Texture2D" uid="uid://ce8btrom2rdhf" path="res://assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="2_creej"]
+[ext_resource type="PackedScene" uid="uid://dqe3fal83vffv" path="res://scenes/SettingsPanel.tscn" id="2_labua"]
 [ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="2_wcfwn"]
 [ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="3_67rbi"]
 [ext_resource type="LabelSettings" uid="uid://42yruh7l0jag" path="res://PixelFont.tres" id="3_keima"]
@@ -21,11 +22,11 @@ font_size = 150
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
-[node name="PauseMenu" type="CanvasLayer"]
+[node name="PauseMenuRoot" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_acxef")
 
-[node name="Control" type="Control" parent="."]
+[node name="PauseControl" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -33,11 +34,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PauseContainer" type="PanelContainer" parent="PauseControl"]
 process_mode = 3
 texture_filter = 1
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(500, 650)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,27 +47,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -300.0
+offset_top = -325.0
 offset_right = 300.0
-offset_bottom = 300.0
+offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_tp2t5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseControl/PauseContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseControl/PauseContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_3tx5v")
 
-[node name="Continue" type="TextureButton" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Continue" type="TextureButton" parent="PauseControl/PauseContainer/VBoxContainer"]
 process_mode = 3
 texture_filter = 1
 custom_minimum_size = Vector2(300, 100)
@@ -77,7 +79,7 @@ texture_pressed = ExtResource("3_67rbi")
 texture_hover = ExtResource("4_ow424")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/Continue"]
+[node name="Label" type="Label" parent="PauseControl/PauseContainer/VBoxContainer/Continue"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 8
@@ -94,7 +96,7 @@ grow_vertical = 2
 text = "Continue"
 label_settings = ExtResource("3_keima")
 
-[node name="Quit" type="TextureButton" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Settings" type="TextureButton" parent="PauseControl/PauseContainer/VBoxContainer"]
 process_mode = 3
 texture_filter = 1
 custom_minimum_size = Vector2(300, 100)
@@ -106,7 +108,36 @@ texture_pressed = ExtResource("3_67rbi")
 texture_hover = ExtResource("4_ow424")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/Quit"]
+[node name="Label" type="Label" parent="PauseControl/PauseContainer/VBoxContainer/Settings"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -11.5
+offset_right = 50.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = ExtResource("3_keima")
+
+[node name="Quit" type="TextureButton" parent="PauseControl/PauseContainer/VBoxContainer"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_wcfwn")
+texture_pressed = ExtResource("3_67rbi")
+texture_hover = ExtResource("4_ow424")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PauseControl/PauseContainer/VBoxContainer/Quit"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 8
@@ -123,5 +154,8 @@ grow_vertical = 2
 text = "Quit"
 label_settings = ExtResource("3_keima")
 
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[node name="SettingsPanel" parent="." instance=ExtResource("2_labua")]
+
+[connection signal="pressed" from="PauseControl/PauseContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="PauseControl/PauseContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="PauseControl/PauseContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

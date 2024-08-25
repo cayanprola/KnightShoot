@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cchcii7hal171"]
+[gd_scene load_steps=30 format=3 uid="uid://cchcii7hal171"]
 
 [ext_resource type="Texture2D" uid="uid://bf167ykp7iiqh" path="res://assets/Old_Guardian/Old_Guardian_death.png" id="1_53df1"]
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_bablv"]
@@ -178,10 +178,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4uce"]
+
 [node name="OldGuardian" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_bablv")
 gem_scene = ExtResource("2_05j5v")
 
@@ -192,6 +194,7 @@ animation = &"Walk"
 frame = 1
 frame_progress = 0.548611
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-20, -33, -23, 38, 22, 37, 23, -33)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 3.5)
+scale = Vector2(2.55028, 4.25434)
+shape = SubResource("CircleShape2D_s4uce")

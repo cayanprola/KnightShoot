@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bphi21n3ltupi"]
+[gd_scene load_steps=20 format=3 uid="uid://bphi21n3ltupi"]
 
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_jgrtr"]
 [ext_resource type="Texture2D" uid="uid://cov0cv8w26mvr" path="res://assets/Crow Animations/crow_death1.png" id="1_s0mre"]
@@ -111,9 +111,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2r0g"]
+
 [node name="Crow" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_jgrtr")
 gem_scene = ExtResource("2_dxwlb")
 
@@ -123,6 +125,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8txvg")
 animation = &"Walk"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-18, 15, -25, 31, 18, 32, 18, 20, 13, 16, 13, -4, 11, -24, -9, -24)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4.5)
+scale = Vector2(1.89773, 3.09208)
+shape = SubResource("CircleShape2D_b2r0g")

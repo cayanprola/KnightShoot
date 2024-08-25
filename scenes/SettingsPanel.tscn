@@ -1,0 +1,189 @@
+[gd_scene load_steps=16 format=3 uid="uid://dqe3fal83vffv"]
+
+[ext_resource type="Script" path="res://scripts/SettingsPanel.gd" id="1_b4uoa"]
+[ext_resource type="Texture2D" uid="uid://ce8btrom2rdhf" path="res://assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="1_l4d4v"]
+[ext_resource type="FontFile" uid="uid://by0ttegopkj4w" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel Square.ttf" id="2_f2jrq"]
+[ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="2_yc0k8"]
+[ext_resource type="Texture2D" uid="uid://bhybqsncvcc5l" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_gradient.svg" id="3_g330f"]
+[ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="3_uv5s7"]
+[ext_resource type="Texture2D" uid="uid://dljsnea7xehje" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_flat.svg" id="4_c5jiv"]
+[ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="4_x5bjr"]
+[ext_resource type="Texture2D" uid="uid://3h2lffcmhk0r" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_gloss.svg" id="5_a10tn"]
+[ext_resource type="FontFile" uid="uid://d36km58u0gqxp" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="5_byk35"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6elhi"]
+atlas = ExtResource("1_l4d4v")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sd7c0"]
+texture = SubResource("AtlasTexture_6elhi")
+
+[sub_resource type="LabelSettings" id="LabelSettings_xbole"]
+font = ExtResource("5_byk35")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_psaqd"]
+font = ExtResource("2_f2jrq")
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8dn3"]
+font = ExtResource("2_f2jrq")
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SettingsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b4uoa")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -350.0
+offset_right = 450.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sd7c0")
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+
+[node name="ReturnButton" type="TextureButton" parent="PanelContainer/MarginContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource("2_yc0k8")
+texture_pressed = ExtResource("3_uv5s7")
+texture_hover = ExtResource("4_x5bjr")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer2/ReturnButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -27.0
+offset_right = 80.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_xbole")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/separation = 400
+
+[node name="Resolution" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+text = "Resolution"
+label_settings = SubResource("LabelSettings_psaqd")
+horizontal_alignment = 3
+
+[node name="ResolutionOption" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 400
+
+[node name="ScreenMode" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+text = "Screen Mode"
+label_settings = SubResource("LabelSettings_psaqd")
+horizontal_alignment = 3
+
+[node name="ModeOption" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/separation = 400
+
+[node name="Volume" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_psaqd")
+
+[node name="VolumeSlider" type="HSlider" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 60
+
+[node name="ApplyButton" type="TextureButton" parent="PanelContainer/VBoxContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+texture_normal = ExtResource("3_g330f")
+texture_pressed = ExtResource("4_c5jiv")
+texture_hover = ExtResource("5_a10tn")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ApplyButton"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -11.5
+offset_right = 22.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Apply"
+label_settings = SubResource("LabelSettings_n8dn3")

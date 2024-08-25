@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fmqfq75j4y1t"]
+[gd_scene load_steps=24 format=3 uid="uid://fmqfq75j4y1t"]
 
 [ext_resource type="Texture2D" uid="uid://c180jjlrgpigl" path="res://assets/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Walk.png" id="1_7hhaq"]
 [ext_resource type="Texture2D" uid="uid://cx537v0a5dflh" path="res://assets/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Hurt.png" id="1_i5pt1"]
@@ -136,20 +136,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_50ib1"]
+
 [node name="Orc" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_tllr8")
 gem_scene = ExtResource("2_8iqd7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(3, 3)
+scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_an35s")
 animation = &"Death"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-9.50597, -18.5041)
-scale = Vector2(1.56164, 2.41734)
-build_mode = 1
-polygon = PackedVector2Array(16.4354, 11.2807, 12.1744, 16.5181, 1.21743, 16.5181, -4.26103, 12.4893, -4.26103, 5.23745, 2.43487, -2.0144, 13.3918, -2.0144, 18.8702, 5.23745)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -2)
+scale = Vector2(2.47521, 3.13112)
+shape = SubResource("CircleShape2D_50ib1")

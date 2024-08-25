@@ -46,6 +46,7 @@ func _ready():
 
 func _process(delta):
 	if get_tree().paused:
+		_show_cursor()
 		return
 	update_viewport_for_weapons()
 	_update_timer_label()
@@ -74,6 +75,7 @@ func get_time_left() -> int:
 	return time_left
 
 func _end_game():
+	_show_cursor()
 	update_gold_display()
 	print("Game Over")
 	_add_run_gold_to_permanent()
@@ -116,6 +118,7 @@ func _input(event):
 			#print("Game speed reset to normal")
 
 func _pause_game():
+	_show_cursor()
 	if pause_menu_instance == null:
 		pause_menu_instance = pause_menu_scene.instantiate() as CanvasLayer
 		add_child(pause_menu_instance)
@@ -127,6 +130,7 @@ func _pause_game():
 	GlobalTimer.stop_shuriken_timer()
 
 func _resume_game():
+	_show_cursor()
 	if pause_menu_instance != null:
 		pause_menu_instance.hide()
 	get_tree().paused = false
@@ -148,6 +152,7 @@ func _setup_revive_hud():
 		revive_hud_instance.connect("revive_selected", Callable(self, "_on_revive_selected"))
 
 func show_revive_hud():
+	_show_cursor()
 	get_tree().paused = true  # Pause the game
 	GlobalTimer.pause_game_timer()
 	GlobalTimer.pause_spawn()
@@ -165,6 +170,7 @@ func _on_revive_selected(revived: bool):
 		_end_game()
 
 func _on_player_level_up(options: Array):
+	_show_cursor()
 	levelling_hud.show_hud(options)
 
 func _on_option_selected(option: Dictionary):

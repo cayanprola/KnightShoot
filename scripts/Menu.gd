@@ -2,6 +2,7 @@ extends Control
 
 func _ready():
 	perm_upgrades.load_game()
+	BackgroundManager.set_background($TextureRect)
 	$StartButton.connect("pressed", Callable(self, "_on_Start_pressed"))
 	$UpgradesButton.connect("pressed", Callable(self, "_on_Upgrades_pressed"))
 	$OptionsButton.connect("pressed", Callable(self, "_on_Options_pressed"))

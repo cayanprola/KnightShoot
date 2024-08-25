@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ba6461urrfi2u"]
+[gd_scene load_steps=20 format=3 uid="uid://ba6461urrfi2u"]
 
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_iv5ys"]
 [ext_resource type="Texture2D" uid="uid://cmw8utn0cv1vv" path="res://assets/Monsters_Creatures_Fantasy/Skeleton/Death.png" id="1_qwva3"]
@@ -108,9 +108,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_31x6h"]
+radius = 32.573
+
 [node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_iv5ys")
 gem_scene = ExtResource("2_36uog")
 
@@ -120,6 +123,7 @@ scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_utm7t")
 animation = &"Walk"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-20, -26, -21, 5, -6, 6, -9, 21, -16, 39, 1, 38, 8, 14, 8, 36, 25, 36, 25, 5, 23, -21, 23, -35, 8, -37, 2.99999, -24)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 6)
+scale = Vector2(0.72073, 1.31302)
+shape = SubResource("CircleShape2D_31x6h")

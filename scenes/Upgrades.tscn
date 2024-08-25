@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://dsp56xvtfbl5j"]
+[gd_scene load_steps=32 format=3 uid="uid://dsp56xvtfbl5j"]
 
 [ext_resource type="Script" path="res://scripts/Upgrades.gd" id="1_u5t8t"]
-[ext_resource type="Texture2D" uid="uid://b76svl5my0r0i" path="res://assets/Bg/Space Background.png" id="2_2v2vu"]
 [ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="3_lxpsi"]
 [ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="4_jd65x"]
 [ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="4_x80sa"]
@@ -87,7 +86,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_2v2vu")
 
 [node name="ReturnButton" type="TextureButton" parent="."]
 texture_filter = 1

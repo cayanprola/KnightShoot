@@ -1,8 +1,14 @@
 extends CanvasLayer
 
+@onready var settings_panel: Control = $SettingsPanel  # Adjust the path if necessary
+@onready var pause_control = $PauseControl # The container for pause menu buttons
+
 func _ready():
-	# Hide the pause menu initially
 	self.hide()
+	settings_panel.hide()
+	
+	# Connect to the SettingsPanel's return signal
+	settings_panel.connect("return_to_parent", Callable(self, "_on_SettingsPanel_returned"))
 
 func show_pause_menu():
 	self.show()
@@ -11,7 +17,6 @@ func show_pause_menu():
 func hide_pause_menu():
 	self.hide()
 	get_tree().paused = false
-	# Call the function to resume the game
 	var game = get_tree().get_root().get_node("Game")
 	if game:
 		game._resume_game()
@@ -19,7 +24,19 @@ func hide_pause_menu():
 func _on_Continue_pressed():
 	hide_pause_menu()
 
+func _on_Settings_pressed():
+	# Hide the pause menu controls and show the SettingsPanel
+	pause_control.hide()
+	settings_panel.show()
+	settings_panel.set_focus_mode(Control.FOCUS_ALL)
+	settings_panel.grab_focus()
+
 func _on_Quit_pressed():
 	perm_upgrades.save_game()
-	get_tree().paused = false  # Ensure the game is unpaused before changing scenes
-	get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # Change to your main menu scene
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+
+func _on_SettingsPanel_returned():
+	# Handle the return action from the SettingsPanel
+	settings_panel.hide()
+	pause_control.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkq4tn3smqn83"]
+[gd_scene load_steps=24 format=3 uid="uid://bkq4tn3smqn83"]
 
 [ext_resource type="Texture2D" uid="uid://btp7kk2ihxoyj" path="res://assets/Monsters_Creatures_Fantasy/Flying eye/Flight.png" id="1_315bt"]
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_mag21"]
@@ -136,10 +136,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqjo4"]
+
 [node name="FlyingEye" type="CharacterBody2D"]
-scale = Vector2(2, 2)
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_mag21")
 gem_scene = ExtResource("2_3yudl")
 
@@ -147,11 +148,11 @@ gem_scene = ExtResource("2_3yudl")
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(2, 0)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ps8ch")
 animation = &"Death"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-16.5, -4.5)
-scale = Vector2(1.72846, 0.555492)
-build_mode = 1
-polygon = PackedVector2Array(0.289275, 13.5015, 1.1571, -3.60041, 4.6284, -4.50051, 10.1246, 0.900103, 12.4388, -5.40062, 16.4887, -4.50051, 18.8029, -0.900103, 23.142, -3.60041, 24.5884, 1.80021, 24.2991, 9.90113, 22.2742, 12.6014, 18.5136, 10.8012, 16.7779, 17.102, 19.0921, 17.102, 19.6707, 24.3028, 17.935, 28.8033, 14.4637, 25.2029, 12.7281, 25.2029, 10.1246, 29.7034, 8.0997, 24.3028, 7.81042, 16.2019, 10.9924, 16.2019, 9.83532, 9.00103, 5.20695, 13.5015)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 4)
+scale = Vector2(2.42428, 1.78172)
+shape = SubResource("CircleShape2D_rqjo4")

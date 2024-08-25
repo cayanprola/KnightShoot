@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7a1s1neooxey"]
+[gd_scene load_steps=5 format=3 uid="uid://b7a1s1neooxey"]
 
 [ext_resource type="Script" path="res://scripts/PurpleLaser.gd" id="1_3te0v"]
 [ext_resource type="Texture2D" uid="uid://cpsu88mrlgq5y" path="res://assets/Laser Sprites/03.png" id="1_je3fh"]
+[ext_resource type="AudioStream" uid="uid://bln8o2goeka56" path="res://assets/kenney_digital-audio/Audio/laser1.ogg" id="3_8jrrr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c214y"]
 
@@ -19,3 +20,7 @@ position = Vector2(3, 0)
 rotation = 1.5708
 scale = Vector2(0.668999, 0.924267)
 shape = SubResource("CircleShape2D_c214y")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8jrrr")
+autoplay = true

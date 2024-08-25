@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var player: CharacterBody2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @export var death_animation_duration = 0.5
 @export var gem_scene: PackedScene
 @export var mob_damage = 15
@@ -17,7 +17,7 @@ func _ready():
 		print("Player node not found!")
 	else:
 		add_to_group("enemies")
-	collision_polygon.set_deferred("disabled", false)  # Ensure collision is enabled
+	collision_shape.set_deferred("disabled", false)  # Ensure collision is enabled
 	
 	# Start playing the Walk animation by default
 	animated_sprite.play("Walk")
@@ -29,6 +29,11 @@ func _physics_process(delta):
 	if player:
 		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * 120
+
+		# Apply a small random offset to avoid mobs clustering in a single line
+		var jitter = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 10
+		velocity += jitter
+
 		move_and_slide()
 	else:
 		print("Player node not found!")
@@ -54,7 +59,7 @@ func kill_mob():
 
 	is_dead = true
 	animated_sprite.play("Death")
-	collision_polygon.set_deferred("disabled", true)  # Disable collision when mob dies
+	collision_shape.set_deferred("disabled", true)  # Disable collision when mob dies
 	await get_tree().create_timer(death_animation_duration).timeout
 	_drop_gem()
 	queue_free()

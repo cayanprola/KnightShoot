@@ -1,6 +1,5 @@
 extends Node
 
-
 # Player's permanent upgrades and their max levels
 var max_health = 0
 var max_health_max = 5
@@ -28,11 +27,29 @@ var revive_max = 1
 
 var gold = 0
 
+# Settings variables
+var resolution_index = 3  # Default to 1920x1080
+var screen_mode_index = 0  # Default to Fullscreen
+var volume = 50  # Default volume
+
 # Path to save the file
 var save_path = "user://save_game.json"
 
+# Resolutions and screen modes for reference
+var resolutions = [
+	Vector2i(1440, 900),
+	Vector2i(1600, 900),
+	Vector2i(1680, 1050),
+	Vector2i(1920, 1080),
+	Vector2i(1920, 1200),
+	Vector2i(2048, 1152),
+	Vector2i(2560, 1440),
+]
+var screen_modes = ["Fullscreen", "Windowed"]
+
 func _ready():
 	load_game()  # Load the game when the script is ready
+	apply_settings()  # Apply the loaded settings
 
 func save_game():
 	var save_data = {
@@ -45,6 +62,9 @@ func save_game():
 		"move_speed": move_speed,
 		"revive": revive,
 		"gold": gold,
+		"resolution_index": resolution_index,
+		"screen_mode_index": screen_mode_index,
+		"volume": volume,
 	}
 	
 	var file = FileAccess.open(save_path, FileAccess.ModeFlags.WRITE)
@@ -63,8 +83,7 @@ func load_game():
 		var file_content = file.get_as_text()
 		print("File content: ", file_content)  # Print the raw file content to see what is in the file
 
-		var json = JSON.new()
-		var save_data = json.parse_string(file_content)
+		var save_data = JSON.parse_string(file_content)
 
 		file.close()
 
@@ -80,7 +99,35 @@ func load_game():
 			move_speed = save_data.get("move_speed", 0)
 			revive = save_data.get("revive", 0)
 			gold = save_data.get("gold", 0)
+			resolution_index = save_data.get("resolution_index", 3)
+			screen_mode_index = save_data.get("screen_mode_index", 0)
+			volume = save_data.get("volume", 50)
 		else:
 			print("Error: Save data is not a dictionary.")
 	else:
 		print("Error opening save file.")
+
+func apply_settings():
+	# Apply screen mode first
+	match screen_mode_index:
+		0:  # Fullscreen
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+			print("Set to Exclusive Fullscreen mode")
+		1:  # Windowed
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			print("Set to Windowed mode")
+
+	# Apply resolution after setting the screen mode
+	var selected_resolution = resolutions[resolution_index]
+	DisplayServer.window_set_size(selected_resolution)
+	print("Resolution set to: ", selected_resolution)
+
+	# Apply volume
+	var db_value = lerp(-80.0, 0.0, volume / 100.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_value)
+
+	# Print current window size and mode for debugging
+	var current_size = DisplayServer.window_get_size()
+	var current_mode = DisplayServer.window_get_mode()
+	print("Current window size: ", current_size)
+	print("Current window mode: ", current_mode)

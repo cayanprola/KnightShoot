@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cam17e6ecavwi"]
+[gd_scene load_steps=37 format=3 uid="uid://cam17e6ecavwi"]
 
 [ext_resource type="Texture2D" uid="uid://c2qfm88wuk65e" path="res://assets/Necromancer_creativekind-Sheet.png" id="1_2h0xt"]
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_625af"]
@@ -244,10 +244,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4v7i"]
+
 [node name="Necromancer" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_625af")
 gem_scene = ExtResource("2_q0e43")
 
@@ -258,7 +260,7 @@ sprite_frames = SubResource("SpriteFrames_k4ivl")
 animation = &"Walk"
 frame_progress = 0.356577
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -48)
-build_mode = 1
-polygon = PackedVector2Array(-25, 19, -33, 109, 22, 107, 29, 17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 12)
+scale = Vector2(2.70967, 4.34891)
+shape = SubResource("CircleShape2D_m4v7i")

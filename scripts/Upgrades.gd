@@ -3,8 +3,6 @@ extends Control
 @onready var gold_label = $TopPanel/HBoxContainer/GoldLabel
 @onready var return_button = $ReturnButton
 @onready var coin_texture_rect = $TopPanel/HBoxContainer/TextureRect
-@onready var coin_animation = coin_texture_rect.texture as AnimatedTexture
-@onready var frame_timer = Timer.new()
 @onready var description_panel = $VBoxContainer/HoverPanel/DescriptionPanel
 @onready var upgrade_name_label = description_panel.get_node("Control/VBoxContainer/UpgradeName")
 @onready var upgrade_description = description_panel.get_node("Control/UpgradeDescription")
@@ -28,17 +26,7 @@ var upgrade_icons = {
 }
 
 func _ready():
-	if coin_animation:
-		# Ensure the texture is assigned and set up
-		print("Frame Count:", coin_animation.frames)  # Check how many frames are in the animation
-		print("Speed Scale:", coin_animation.speed_scale)        # Ensure speed scale is correct
-		print("Is Paused:", coin_animation.pause)                # Ensure the animation is not paused
-		
-		# Force the animation to start
-		coin_animation.pause = true
-		coin_animation.pause = false
-	else:
-		print("No AnimatedTexture found on TextureRect!")
+	BackgroundManager.set_background($TextureRect)
 	
 	# Initially hide the description panel
 	description_panel.hide()

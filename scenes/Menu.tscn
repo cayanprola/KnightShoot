@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnhnhy08ygo17"]
+[gd_scene load_steps=7 format=3 uid="uid://dnhnhy08ygo17"]
 
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_2lq16"]
-[ext_resource type="Texture2D" uid="uid://b76svl5my0r0i" path="res://assets/Bg/Space Background.png" id="2_q6u2m"]
 [ext_resource type="Texture2D" uid="uid://b8nf0mun666g6" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_gradient.svg" id="3_xo40b"]
 [ext_resource type="Texture2D" uid="uid://bgk520huev3lg" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="4_jp7w3"]
 [ext_resource type="Texture2D" uid="uid://8pfhpewa60eu" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="5_ibeku"]
@@ -26,10 +25,12 @@ script = ExtResource("1_2lq16")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("2_q6u2m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="StartButton" type="TextureButton" parent="."]
 texture_filter = 1

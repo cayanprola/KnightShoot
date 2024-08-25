@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d725jf3bm72o"]
+[gd_scene load_steps=11 format=3 uid="uid://d725jf3bm72o"]
 
 [ext_resource type="Script" path="res://scripts/Fireball.gd" id="1_ahnrq"]
 [ext_resource type="Texture2D" uid="uid://dft4gsv16opdb" path="res://assets/New_All_Fire_Bullet_Pixel_16x16/All_Fire_Bullet_Pixel_16x16_00.png" id="1_fxsna"]
+[ext_resource type="AudioStream" uid="uid://bbfmiffs7cyn5" path="res://assets/FireSound/foom_0.wav" id="3_ggcmx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l5tk"]
 atlas = ExtResource("1_fxsna")
@@ -65,3 +66,7 @@ frame = 4
 position = Vector2(12.5, -2.5)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_ebc0k")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ggcmx")
+autoplay = true

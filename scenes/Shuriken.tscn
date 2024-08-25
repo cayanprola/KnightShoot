@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rn5d2wlyn374"]
+[gd_scene load_steps=6 format=3 uid="uid://rn5d2wlyn374"]
 
 [ext_resource type="Texture2D" uid="uid://c4f4d5d0l4axj" path="res://assets/Trap and Weapon/00 All.png" id="1_3c0cw"]
 [ext_resource type="Script" path="res://scripts/Shuriken.gd" id="1_uv2wq"]
+[ext_resource type="AudioStream" uid="uid://xowridcrndsg" path="res://assets/kenney_rpg-audio/Audio/drawKnife1.ogg" id="3_6v8hx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpcgx"]
 atlas = ExtResource("1_3c0cw")
@@ -21,3 +22,7 @@ texture = SubResource("AtlasTexture_kpcgx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i3uot")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6v8hx")
+autoplay = true
