@@ -15,7 +15,8 @@ var screen_modes = ["Fullscreen", "Windowed"]
 # Reference to UI elements
 @onready var return_button = $PanelContainer/MarginContainer2/ReturnButton
 @onready var resolution_option = $PanelContainer/VBoxContainer/HBoxContainer3/ResolutionOption
-@onready var volume_slider = $PanelContainer/VBoxContainer/HBoxContainer/VolumeSlider
+@onready var master_volume_slider = $PanelContainer/VBoxContainer/HBoxContainer/VolumeSlider
+@onready var weapons_volume_slider = $PanelContainer/VBoxContainer/HBoxContainer4/VolumeSlider
 @onready var screen_mode_option = $PanelContainer/VBoxContainer/HBoxContainer2/ModeOption
 @onready var apply_button = $PanelContainer/VBoxContainer/MarginContainer/ApplyButton
 
@@ -67,12 +68,14 @@ func _load_settings():
 			print("Unknown screen mode.")
 
 	# Load volume from saved data
-	volume_slider.value = perm_upgrades.volume
+	master_volume_slider.value = perm_upgrades.volume
+	weapons_volume_slider.value = perm_upgrades.weapons_volume
 
 func _on_ApplyButton_pressed():
 	# Save the selected settings
 	perm_upgrades.resolution_index = resolution_option.get_selected_id()
-	perm_upgrades.volume = volume_slider.value
+	perm_upgrades.volume = master_volume_slider.value
+	perm_upgrades.weapons_volume = weapons_volume_slider.value
 	perm_upgrades.screen_mode_index = screen_mode_option.get_selected_id()
 	perm_upgrades.save_game()
 
@@ -88,10 +91,21 @@ func _apply_resolution():
 	DisplayServer.window_set_size(selected_resolution)
 
 func _apply_volume():
-	var volume_value = volume_slider.value
+	var master_volume_value = master_volume_slider.value
 	# Map the slider value (0-100) to a dB range, for example, -80 dB to 0 dB
-	var db_value = lerp(-80.0, 0.0, volume_value / 100.0)
+	var db_value = lerp(-40.0, 0.0, master_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_value)
+
+	var weapons_volume_value = weapons_volume_slider.value
+	# Map the slider value (0-100) to a dB range, for example, -80 dB to 0 dB
+	var weapons_db_value = lerp(-40.0, 0.0, weapons_volume_value / 100.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("WeaponsBus"), weapons_db_value)
+
+	# Also save this value in the global upgrades data
+	perm_upgrades.volume = master_volume_value
+	perm_upgrades.weapons_volume = weapons_volume_value
+	
+	perm_upgrades.save_game()
 
 func _apply_screen_mode():
 	var selected_index = screen_mode_option.get_selected_id()

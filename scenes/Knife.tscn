@@ -30,3 +30,4 @@ shape = SubResource("RectangleShape2D_hk6e5")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ym8bv")
 autoplay = true
+bus = &"WeaponsBus"
