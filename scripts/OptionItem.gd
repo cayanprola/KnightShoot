@@ -16,7 +16,7 @@ func _on_gui_input(event):
 func set_option_data(data):
 	option_data = data
 	$MarginContainer/HBoxContainer/VBoxContainer/Name.text = data.name
-	$MarginContainer/HBoxContainer/MarginContainer/Icon.texture = data.icon
+	$MarginContainer/HBoxContainer/MarginContainer/TextureRect/Icon.texture = data.icon
 	$MarginContainer/HBoxContainer/VBoxContainer/CurrentLevel.text = "Level " + str(data.level + 1)
 	
 	# Now use the global reference since UpgradeManager is an autoload

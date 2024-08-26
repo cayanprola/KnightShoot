@@ -1,0 +1,258 @@
+[gd_scene load_steps=5 format=3 uid="uid://q5x32sm0rxli"]
+
+[ext_resource type="Script" path="res://scripts/UpgradeHud.gd" id="1_j1lts"]
+[ext_resource type="Texture2D" uid="uid://c2d1ns0k0u3af" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders.svg" id="1_nquxl"]
+[ext_resource type="Texture2D" uid="uid://da7p8x8n0e51k" path="res://assets/kenney_ui-pack/Vector/Extra/divider.svg" id="2_tv24w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcafs"]
+atlas = ExtResource("1_nquxl")
+region = Rect2(414, 486, 48, 48)
+
+[node name="UpgradesHud" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_right = 310.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 10
+script = ExtResource("1_j1lts")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="WeaponIcon1" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer3"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="WeaponIcon2" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer3/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer4"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="WeaponIcon3" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer4/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer5"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="WeaponIcon4" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer5/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Divider" type="TextureRect" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 6
+texture = ExtResource("2_tv24w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="StatIcon1" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer2/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer3"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="StatIcon2" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer3/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer4"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="StatIcon3" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer4/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer5"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wcafs")
+
+[node name="StatIcon4" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer5/Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2

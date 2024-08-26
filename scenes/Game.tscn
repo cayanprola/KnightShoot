@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://m4hx1ig8baq0"]
+[gd_scene load_steps=22 format=3 uid="uid://m4hx1ig8baq0"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_67srf"]
 [ext_resource type="PackedScene" uid="uid://bpbxtf4hs8obx" path="res://scenes/PatternMap.tscn" id="2_5piyp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://584fjvi3ddiy" path="res://scenes/mob_spawner.tscn" id="5_aqewm"]
 [ext_resource type="PackedScene" uid="uid://c332828ydlg0y" path="res://scenes/WaveManager.tscn" id="5_wb7rp"]
 [ext_resource type="PackedScene" uid="uid://wna6vmxi4s6" path="res://scenes/BaseWeapon.tscn" id="7_euf6g"]
+[ext_resource type="PackedScene" uid="uid://q5x32sm0rxli" path="res://scenes/UpgradesHud.tscn" id="8_4wvaq"]
 [ext_resource type="PackedScene" uid="uid://dj4ope1j71tnw" path="res://scenes/LevellingHUD.tscn" id="8_7uhdb"]
 [ext_resource type="Texture2D" uid="uid://cimkj0cn3yqwg" path="res://assets/Coin_Gems/MonedaD.png" id="8_71geu"]
 [ext_resource type="FontFile" uid="uid://37n3hdxauwek" path="res://assets/kenney_kenney-fonts/Fonts/Kenney High Square.ttf" id="8_f7c0k"]
@@ -62,6 +63,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="UpgradesHud" parent="GameUI/Control" instance=ExtResource("8_4wvaq")]
+layout_mode = 1
+
 [node name="XPBarContainer" parent="GameUI/Control" instance=ExtResource("8_jxx0y")]
 layout_mode = 1
 anchors_preset = 0
@@ -77,7 +81,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="LevelUpButton" type="Button" parent="GameUI/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,14 +116,19 @@ anchor_right = 1.0
 offset_left = -200.0
 offset_bottom = 80.0
 grow_horizontal = 0
+theme_override_constants/separation = 10
 
-[node name="GoldCoin" type="TextureRect" parent="GameUI/Control/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="GoldCoin" type="TextureRect" parent="GameUI/Control/HBoxContainer/MarginContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = SubResource("AtlasTexture_jurm8")
 
-[node name="CurrentGoldRun" type="Label" parent="GameUI/Control/HBoxContainer"]
+[node name="CurrentGoldRun" type="Label" parent="GameUI/Control/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 label_settings = SubResource("LabelSettings_ytert")

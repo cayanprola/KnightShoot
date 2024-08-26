@@ -26,6 +26,7 @@ extends CharacterBody2D
 
 @onready var xp_bar = get_tree().get_root().get_node("Game/GameUI/Control/XPBarContainer/XPBar")
 @onready var game = get_tree().get_root().get_node("Game")
+@onready var upgrades_hud = get_tree().get_root().get_node("Game/GameUI/Control/UpgradesHud")
 
 var shoot_timer = 0.0
 var knife_timer = 0.0
@@ -67,6 +68,7 @@ signal gold_collected(amount: int)
 
 func _ready():
 	add_to_group("player")
+	print(upgrades_hud)
 	apply_permanent_upgrades()  # Apply permanent upgrades first
 	health_bar.set_max_health(max_health)  # Update the health bar with max health
 	health = max_health  # Set health to max health initially
@@ -313,7 +315,6 @@ func get_upgrade_level(upgrade_name: String) -> int:
 		_:
 			return 0
 
-
 func get_available_options() -> Array:
 	var options = []
 	var weapon_options = {
@@ -333,27 +334,52 @@ func get_available_options() -> Array:
 
 	var potential_upgrades = []
 
-	# Add upgrades for weapons that are not maxed out
-	for weapon in weapon_options.keys():
-		var level = get_upgrade_level(weapon)
-		if level < upgrade_manager.get_max_level(weapon):
+	# Allow leveling up for already selected weapons
+	for selected_weapon in selected_weapons:
+		var level = get_upgrade_level(selected_weapon["name"])
+		if level < upgrade_manager.get_max_level(selected_weapon["name"]):
 			potential_upgrades.append({
-				"name": weapon,
-				"icon": weapon_options[weapon],
+				"name": selected_weapon["name"],
+				"icon": selected_weapon["icon"],
 				"level": level,
-				"description": upgrade_manager.get_description(weapon, level)
+				"description": upgrade_manager.get_description(selected_weapon["name"], level)
 			})
 
-	# Add upgrades for stats that are not maxed out
-	for stat in stat_options.keys():
-		var level = get_upgrade_level(stat)
-		if level < upgrade_manager.get_max_level(stat):
+	# Allow leveling up for already selected stats
+	for selected_stat in selected_stats:
+		var level = get_upgrade_level(selected_stat["name"])
+		if level < upgrade_manager.get_max_level(selected_stat["name"]):
 			potential_upgrades.append({
-				"name": stat,
-				"icon": stat_options[stat],
+				"name": selected_stat["name"],
+				"icon": selected_stat["icon"],
 				"level": level,
-				"description": upgrade_manager.get_description(stat, level)
+				"description": upgrade_manager.get_description(selected_stat["name"], level)
 			})
+
+	# If there are available slots, add new upgrade options
+	if selected_weapons.size() < max_weapons:
+		for weapon in weapon_options.keys():
+			if not selected_weapons.has({"name": weapon, "icon": weapon_options[weapon]}):
+				var level = get_upgrade_level(weapon)
+				if level < upgrade_manager.get_max_level(weapon):
+					potential_upgrades.append({
+						"name": weapon,
+						"icon": weapon_options[weapon],
+						"level": level,
+						"description": upgrade_manager.get_description(weapon, level)
+					})
+
+	if selected_stats.size() < max_stats:
+		for stat in stat_options.keys():
+			if not selected_stats.has({"name": stat, "icon": stat_options[stat]}):
+				var level = get_upgrade_level(stat)
+				if level < upgrade_manager.get_max_level(stat):
+					potential_upgrades.append({
+						"name": stat,
+						"icon": stat_options[stat],
+						"level": level,
+						"description": upgrade_manager.get_description(stat, level)
+					})
 
 	# Shuffle the potential upgrades to ensure randomness
 	potential_upgrades.shuffle()
@@ -370,8 +396,6 @@ func get_available_options() -> Array:
 
 	return options
 
-
-
 func upgrade_stat(upgrade_name: String):
 	var max_level = upgrade_manager.get_max_level(upgrade_name)
 	var level = get_upgrade_level(upgrade_name)
@@ -380,12 +404,46 @@ func upgrade_stat(upgrade_name: String):
 		print(upgrade_name + " is already at max level.")
 		return
 
+	var icon = null
+
+	# Store the corresponding icon with the upgrade
+	match upgrade_name:
+		"Purple Laser":
+			icon = preload("res://assets/Icons/PurpleLaser.png")
+		"Shuriken":
+			icon = preload("res://assets/Icons/shuriken.png")
+		"Fireball":
+			icon = preload("res://assets/Icons/Fireball.png")
+		"Knife":
+			icon = preload("res://assets/Icons/Knife.png")
+		"Health":
+			icon = preload("res://assets/Icons/Health.png")
+		"Health Regen":
+			icon = preload("res://assets/Icons/HealthRegen.png")
+		"Damage":
+			icon = preload("res://assets/Icons/Damage.png")
+		"Move Speed":
+			icon = preload("res://assets/Icons/MoveSpeed.png")
+		"Attack Speed":
+			icon = preload("res://assets/Icons/AttackSpeed.png")
+
+	# Check if the weapon or stat is already selected before adding
+	var is_new_selection = false
+
 	if upgrade_name in ["Purple Laser", "Shuriken", "Fireball", "Knife"]:  # Weapon upgrades
-		if not selected_weapons.has(upgrade_name) and selected_weapons.size() < max_weapons:
-			selected_weapons.append(upgrade_name)
+		if not selected_weapons.has({"name": upgrade_name, "icon": icon}):
+			if selected_weapons.size() < max_weapons:
+				selected_weapons.append({"name": upgrade_name, "icon": icon})
+				is_new_selection = true
 	else:  # Stat upgrades
-		if not selected_stats.has(upgrade_name) and selected_stats.size() < max_stats:
-			selected_stats.append(upgrade_name)
+		if not selected_stats.has({"name": upgrade_name, "icon": icon}):
+			if selected_stats.size() < max_stats:
+				selected_stats.append({"name": upgrade_name, "icon": icon})
+				is_new_selection = true
+
+	# Only update the HUD if this is a new selection
+	if is_new_selection:
+		upgrades_hud.update_hud(selected_weapons, selected_stats)
 
 	# Increase the level
 	match upgrade_name:
@@ -430,7 +488,6 @@ func upgrade_stat(upgrade_name: String):
 	# Check if maxed out
 	if get_upgrade_level(upgrade_name) >= max_level:
 		print(upgrade_name + " is now maxed out.")
-
 
 func _toggle_fireball(active: bool):
 	fireball_active = active
