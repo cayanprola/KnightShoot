@@ -68,7 +68,10 @@ text = "Level Up!"
 label_settings = SubResource("LabelSettings_y72lx")
 
 [node name="OptionsContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 15
 
 [node name="Control" type="Control" parent="Control/PanelContainer"]
 custom_minimum_size = Vector2(200, 100)

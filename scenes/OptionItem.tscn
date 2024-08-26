@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbrdxjeatst3b"]
+[gd_scene load_steps=5 format=3 uid="uid://dbrdxjeatst3b"]
 
 [ext_resource type="Script" path="res://scripts/OptionItem.gd" id="1_20pf0"]
 [ext_resource type="Texture2D" uid="uid://c2d1ns0k0u3af" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders.svg" id="2_026g8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nagml"]
+atlas = ExtResource("2_026g8")
+region = Rect2(44, 428, 38, 38)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q3qv8"]
 atlas = ExtResource("2_026g8")
@@ -17,35 +21,48 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -100.0
+offset_top = -75.0
 offset_right = 300.0
-offset_bottom = 50.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_20pf0")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_right = 313.0
-offset_bottom = 128.0
-theme_override_constants/margin_left = 55
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_nagml")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -69.0
+offset_right = 273.0
+offset_bottom = 69.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-texture_filter = 1
-layout_mode = 2
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 30
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = SubResource("AtlasTexture_q3qv8")
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/TextureRect"]
+[node name="Icon" type="TextureRect" parent="TextureRect/HBoxContainer/MarginContainer/TextureRect"]
 texture_filter = 1
 custom_minimum_size = Vector2(116, 116)
 layout_mode = 1
@@ -62,24 +79,31 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 
-[node name="CurrentLevel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="CurrentLevel" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_constants/margin_left = 100
 
-[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="Description" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/MarginContainer"]
 texture_filter = 1
 layout_mode = 2
