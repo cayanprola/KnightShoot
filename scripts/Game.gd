@@ -5,9 +5,8 @@ extends Node2D
 var player_dead = false
 
 @onready var timer_label: Label = $GameUI/Control/TimerLabel
-@onready var gold_icon: TextureRect = $GameUI/Control/HBoxContainer/GoldCoin
-@onready var gold_label = $GameUI/Control/HBoxContainer/CurrentGoldRun
-@onready var run_gold = $EndGame/Control/PanelContainer/VBoxContainer/MarginContainer/RunGold
+@onready var gold_icon: TextureRect = $GameUI/Control/Control/MarginContainer/HBoxContainer/GoldCoin
+@onready var gold_label = $GameUI/Control/Control/MarginContainer/HBoxContainer/CurrentGoldRun
 var current_run_gold = 0
 var time_left = 600
 
@@ -18,7 +17,6 @@ var time_left = 600
 var pause_menu_instance: CanvasLayer = null
 var revive_hud_instance: CanvasLayer = null
 var endgame_hud_instance: CanvasLayer = null
-
 
 @export var inactivity_time = 5.0
 var inactivity_timer: Timer
@@ -192,9 +190,8 @@ func _add_run_gold_to_permanent():
 
 func update_gold_display():
 	if gold_label:
+		print(gold_label)
 		gold_label.text = str(current_run_gold)
-	elif run_gold:
-		run_gold.text = str(current_run_gold)
 
 func _reset_inactivity_timer():
 	inactivity_timer.start()

@@ -25,7 +25,7 @@ font_size = 64
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jurm8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_004vu"]
 atlas = ExtResource("8_71geu")
 region = Rect2(0, 0, 16, 16)
 
@@ -108,31 +108,39 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 label_settings = SubResource("LabelSettings_c06pf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/Control"]
+[node name="Control" type="Control" parent="GameUI/Control"]
+custom_minimum_size = Vector2(200, 90)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 80.0
+offset_left = -64.0
+offset_bottom = 64.0
 grow_horizontal = 0
-theme_override_constants/separation = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="GameUI/Control/HBoxContainer"]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/Control/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_top = 10
 
-[node name="GoldCoin" type="TextureRect" parent="GameUI/Control/HBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/Control/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="GoldCoin" type="TextureRect" parent="GameUI/Control/Control/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = SubResource("AtlasTexture_jurm8")
+texture = SubResource("AtlasTexture_004vu")
 
-[node name="CurrentGoldRun" type="Label" parent="GameUI/Control/HBoxContainer/MarginContainer"]
+[node name="CurrentGoldRun" type="Label" parent="GameUI/Control/Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 label_settings = SubResource("LabelSettings_ytert")
-vertical_alignment = 1
 
 [node name="LevellingHUD" parent="." instance=ExtResource("8_7uhdb")]
 

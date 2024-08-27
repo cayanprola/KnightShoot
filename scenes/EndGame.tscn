@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2uopyjutjlrr"]
+[gd_scene load_steps=12 format=3 uid="uid://b2uopyjutjlrr"]
 
 [ext_resource type="Texture2D" uid="uid://ce8btrom2rdhf" path="res://assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="1_sr0gw"]
 [ext_resource type="Script" path="res://scripts/EndGame.gd" id="1_xjakr"]
@@ -19,12 +19,6 @@ texture = SubResource("AtlasTexture_keirr")
 font = ExtResource("2_hsydl")
 font_size = 128
 outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ihqcc"]
-font = ExtResource("4_pe5ml")
-font_size = 20
-outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xlqfx"]
@@ -77,12 +71,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Game Over!"
 label_settings = SubResource("LabelSettings_5jgjf")
-
-[node name="RunGold" type="Label" parent="Control/PanelContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_ihqcc")
 
 [node name="PlayAgain" type="TextureButton" parent="Control/PanelContainer/VBoxContainer"]
 process_mode = 3

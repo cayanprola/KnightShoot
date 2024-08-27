@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var collected_gold = $Control/PanelContainer/VBoxContainer/MarginContainer/RunGold
 @onready var play_again = $Control/PanelContainer/VBoxContainer/PlayAgain
 @onready var upgrades = $Control/PanelContainer/VBoxContainer/Upgrades
 @onready var quit = $Control/PanelContainer/VBoxContainer/Quit

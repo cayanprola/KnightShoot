@@ -2,6 +2,7 @@ extends Control
 
 @onready var gold_label = $TopPanel/HBoxContainer/GoldLabel
 @onready var return_button = $ReturnButton
+@onready var refund_button = $RefundButton
 @onready var coin_texture_rect = $TopPanel/HBoxContainer/TextureRect
 @onready var description_panel = $VBoxContainer/HoverPanel/DescriptionPanel
 @onready var upgrade_name_label = description_panel.get_node("Control/VBoxContainer/UpgradeName")
@@ -47,13 +48,12 @@ func _ready():
 	# Update initial gold display
 	update_gold_display()
 
-	# Connect the return button
-	return_button.connect("pressed", Callable(self, "_on_BackButton_pressed"))
-	
 	# Connect click signals for each upgrade panel
 	connect_upgrade_panel_signals()
 
-	# Connect the Buy button to purchase action
+	# Connect buttons
+	refund_button.connect("pressed", Callable(self, "_on_refund_button_pressed"))
+	return_button.connect("pressed", Callable(self, "_on_BackButton_pressed"))
 	buy_button.connect("pressed", Callable(self, "_on_buy_button_pressed"))
 
 func connect_upgrade_panel_signals():
@@ -234,3 +234,28 @@ func _on_BackButton_pressed():
 
 func update_gold_display():
 	gold_label.text = str(perm_upgrades.gold)
+
+func _on_refund_button_pressed():
+	var refund_amount = perm_upgrades.refund_upgrades()
+	print("Refunded: ", refund_amount, " gold.")
+	update_gold_display()
+	reset_upgrade_display()
+	apply_upgrades_to_player()
+
+func reset_upgrade_display():
+	var upgrade_names = ["max_health", "health_regen", "armor", "damage", "attack_speed", "attack_size", "move_speed", "revive"]
+	
+	for upgrade_name in upgrade_names:
+		update_upgrade_display(upgrade_name, 0)
+
+	# Update the description panel if it's visible
+	if description_panel.visible:
+		if current_upgrade_name != "":
+			# Get the price of the currently selected upgrade
+			var price = get_upgrade_price(current_upgrade_name)
+			if price == -1:
+				upgrade_price.text = "Maxed"
+				coin_text.hide()
+			else:
+				upgrade_price.text = str(price)
+				coin_text.show()

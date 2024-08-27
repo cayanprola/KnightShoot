@@ -81,7 +81,7 @@ func load_game():
 	print("Attempting to load game...")  # Debug print to indicate the function is called
 	var file = FileAccess.open(save_path, FileAccess.ModeFlags.READ)
 	if file:
-		print("File opened successfully.")  # Debug print to confirm file opening
+		print("File opened successfully.")
 		var file_content = file.get_as_text()
 		print("File content: ", file_content)  # Print the raw file content to see what is in the file
 
@@ -109,6 +109,64 @@ func load_game():
 			print("Error: Save data is not a dictionary.")
 	else:
 		print("Error opening save file.")
+
+func refund_upgrades():
+	var refund_amount = 0
+	
+	# Calculate total gold spent on upgrades
+	refund_amount += calculate_refund_amount("max_health", max_health)
+	refund_amount += calculate_refund_amount("health_regen", health_regen)
+	refund_amount += calculate_refund_amount("armor", armor)
+	refund_amount += calculate_refund_amount("damage", damage)
+	refund_amount += calculate_refund_amount("attack_speed", attack_speed)
+	refund_amount += calculate_refund_amount("attack_size", attack_size)
+	refund_amount += calculate_refund_amount("move_speed", move_speed)
+	refund_amount += calculate_refund_amount("revive", revive)
+
+	# Reset upgrades
+	max_health = 0
+	health_regen = 0
+	armor = 0
+	damage = 0
+	attack_speed = 0
+	attack_size = 0
+	move_speed = 0
+	revive = 0
+
+	# Refund the calculated gold
+	gold += refund_amount
+	save_game()
+	return refund_amount
+
+func calculate_refund_amount(upgrade_type: String, level: int) -> int:
+	var base_prices = {
+		"max_health": 100,
+		"health_regen": 100,
+		"armor": 150,
+		"damage": 120,
+		"attack_speed": 130,
+		"attack_size": 140,
+		"move_speed": 110,
+		"revive": 500
+	}
+	
+	var scaling_factors = {
+		"max_health": 1.2,
+		"health_regen": 1.5,
+		"armor": 1.2,
+		"damage": 1.3,
+		"attack_speed": 1.2,
+		"attack_size": 1.3,
+		"move_speed": 1.3,
+	}
+	
+	var total_refund = 0
+	for i in range(level):
+		var price = int(base_prices[upgrade_type] * pow(scaling_factors.get(upgrade_type, 1.2), i))
+		total_refund += price
+	
+	return total_refund
+
 
 func apply_settings():
 	# Apply screen mode first

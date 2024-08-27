@@ -1,8 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://dsp56xvtfbl5j"]
+[gd_scene load_steps=36 format=3 uid="uid://dsp56xvtfbl5j"]
 
 [ext_resource type="Script" path="res://scripts/Upgrades.gd" id="1_u5t8t"]
+[ext_resource type="Texture2D" uid="uid://cib64qvtidj65" path="res://assets/kenney_ui-pack/Vector/Red/button_rectangle_depth_gradient.svg" id="2_bio34"]
+[ext_resource type="Texture2D" uid="uid://bj318pt5xkbpo" path="res://assets/kenney_ui-pack/Vector/Red/button_rectangle_depth_flat.svg" id="3_k1khi"]
 [ext_resource type="Texture2D" uid="uid://kgcigxg5yowr" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="3_lxpsi"]
 [ext_resource type="Texture2D" uid="uid://cc7wr43al7upc" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="4_jd65x"]
+[ext_resource type="Texture2D" uid="uid://ci3e5rs3l43j" path="res://assets/kenney_ui-pack/Vector/Red/button_rectangle_depth_gloss.svg" id="4_tge4i"]
 [ext_resource type="Texture2D" uid="uid://bisf5d582ds0p" path="res://assets/kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="4_x80sa"]
 [ext_resource type="FontFile" uid="uid://d36km58u0gqxp" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="6_yikh3"]
 [ext_resource type="Texture2D" uid="uid://c2t0jx7gov8v2" path="res://assets/CoinText.tres" id="7_hdw86"]
@@ -24,6 +27,12 @@
 [ext_resource type="Texture2D" uid="uid://3h2lffcmhk0r" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_depth_gloss.svg" id="22_jek3j"]
 [ext_resource type="FontFile" uid="uid://by0ttegopkj4w" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel Square.ttf" id="23_keluk"]
 [ext_resource type="Texture2D" uid="uid://cimkj0cn3yqwg" path="res://assets/Coin_Gems/MonedaD.png" id="23_qre5f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q48j8"]
+font = ExtResource("23_keluk")
+font_size = 48
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vjaet"]
 font = ExtResource("6_yikh3")
@@ -86,6 +95,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="RefundButton" type="TextureButton" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(550, 80)
+layout_mode = 1
+offset_right = 550.0
+offset_bottom = 90.0
+texture_normal = ExtResource("2_bio34")
+texture_pressed = ExtResource("3_k1khi")
+texture_hover = ExtResource("4_tge4i")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="RefundButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -36.0
+offset_right = 264.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Refund PowerUps"
+label_settings = SubResource("LabelSettings_q48j8")
 
 [node name="ReturnButton" type="TextureButton" parent="."]
 texture_filter = 1

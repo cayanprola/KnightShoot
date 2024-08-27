@@ -85,7 +85,7 @@ var upgrades = {
 	},
 	"Knife": {
 		"descriptions": [
-			"Unlocks the Knife.\n+1 Projectile Count.",
+			"Unlocks the Knife.",
 			"+1 Projectile Count.\nIncreased projectile speed.\n+5 Damage",
 			"+1 Projectile Count.\nIncreased projectile speed.\n+5 Damage",
 			"+1 Projectile Count.\nIncreased projectile speed.\n+5 Damage",						
