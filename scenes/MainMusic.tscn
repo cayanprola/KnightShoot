@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://1m7guur2tvor"]
+
+[ext_resource type="AudioStream" uid="uid://dcmy6t7ytkto2" path="res://assets/5 Action Chiptunes By Juhani Junkala/Juhani Junkala [Retro Game Music Pack] Level 3.wav" id="1_b1tjq"]
+
+[node name="MainMusic" type="Node"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_b1tjq")
+autoplay = true
+bus = &"MusicBus"

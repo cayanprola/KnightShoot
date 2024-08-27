@@ -51,6 +51,8 @@ var shuriken_active = false
 var shuriken_rotation_speed = PI
 var shuriken_orbit_radius = 90
 var fireball_timer = 0.0
+var fireball_damage = 30
+var fireball_speed = 300
 var fireball_active = false
 var fireball = []
 var knife_speed = 400
@@ -122,19 +124,19 @@ func _handle_shooting(delta):
 	knife_timer -= delta
 
 	if shoot_timer <= 0:
-		shoot_timer = max(0.8, 5.0 / (0.5 + atk_speed * fireball_level))  # Reduce time between shots with higher attack speed
+		shoot_timer = max(0.75, 1.5 / (0.5 + atk_speed ))  # Reduce time between shots with higher attack speed
 		_shoot()
 		print("Atk speed laser timer ", atk_speed, " laser timer ", shoot_timer) 
 
 	if fireball_active and fireball_level > 0 and fireball_timer <= 0:
-		fireball_timer = max(0.9, 5.0 / (0.5 + atk_speed * fireball_level))  # Reduce time between fireballs with higher attack speed
+		fireball_timer = max(0.9, 5.0 / (0.5 + atk_speed))  # Reduce time between fireballs with higher attack speed
 		_shoot_fireball()
 		print("Atk speed fireball timer ", atk_speed, " fireball timer ", fireball_timer) 
 		
 
 	# Continuous knife shooting
 	if knife_level > 0 and knife_timer <= 0:
-		knife_timer = max(0.8, 5.0 / (0.5 + atk_speed * knife_level))  # Adjust rate of fire with knife level
+		knife_timer = max(0.8, 5.0 / (0.5 + atk_speed))  # Adjust rate of fire with knife level
 		_shoot_knives()
 		print("Atk speed knife timer ", atk_speed, " knife timer ", knife_timer) 
 		
@@ -179,24 +181,6 @@ func _shoot():
 		print("Laser damage: ", weapon.laser_damage)
 		weapon.laser_direction = direction  # Set the direction based on the level
 		get_parent().add_child(weapon)
-
-func _shoot_fireball():
-	var fireball_count = clamp((fireball_level - 1) / 2 + 1, 1, 3)  # Clamp the number of fireballs to a maximum of 3
-	fireball.clear()
-	
-	for i in range(fireball_count):
-		var target = _get_random_enemy()
-		if target:
-			var direction = (target.global_position - global_position).normalized()
-			var weapon = fireball_scene.instantiate()
-			weapon.global_position = global_position
-			weapon.fireball_damage += player_dmg  # Set the damage based on level and player damage
-			print("Fireball damage: ", weapon.fireball_damage)
-			weapon.scale = Vector2(atk_size, atk_size)
-			weapon.rotation = direction.angle()
-			weapon.fireball_direction = direction  # Set the direction based on the target
-			get_parent().add_child(weapon)
-			fireball.append(weapon)
 
 func _get_random_enemy() -> Node2D:
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -451,7 +435,7 @@ func upgrade_stat(upgrade_name: String):
 	if is_new_selection:
 		upgrades_hud.update_hud(selected_weapons, selected_stats)
 
-	# Increase the level
+	# Increase the level and apply upgrades
 	match upgrade_name:
 		"Purple Laser":
 			purple_laser_level += 1
@@ -462,6 +446,7 @@ func upgrade_stat(upgrade_name: String):
 			print("Shuriken level:", shuriken_level)
 		"Fireball":
 			fireball_level += 1
+			apply_fireball_upgrades()
 			print("Fireball level:", fireball_level)
 		"Knife":
 			knife_level += 1
@@ -494,6 +479,7 @@ func upgrade_stat(upgrade_name: String):
 	# Check if maxed out
 	if get_upgrade_level(upgrade_name) >= max_level:
 		print(upgrade_name + " is now maxed out.")
+
 
 func _toggle_fireball(active: bool):
 	fireball_active = active
@@ -597,6 +583,44 @@ func _shoot_knives():
 		knife.knife_speed = knife_speed  # Set speed based on level
 		knife.knife_damage = knife_damage  # Set damage based on level
 		get_parent().add_child(knife)
+
+func _shoot_fireball():
+	var fireball_count = min(3, (fireball_level + 1) / 2)  # Determine number of fireballs
+	fireball.clear()
+	
+	for i in range(fireball_count):
+		var target = _get_random_enemy()
+		if target:
+			var direction = (target.global_position - global_position).normalized()
+			var weapon = fireball_scene.instantiate()
+			weapon.global_position = global_position
+			weapon.fireball_damage = fireball_damage  # Set the damage from the upgraded values
+			weapon.fireball_speed = fireball_speed    # Set the speed from the upgraded values
+			weapon.scale = Vector2(atk_size, atk_size)
+			weapon.rotation = direction.angle()
+			weapon.fireball_direction = direction  # Set the direction based on the target
+			print("Fireball damage:", weapon.fireball_damage, " Fireball speed:", weapon.fireball_speed)
+			get_parent().add_child(weapon)
+			fireball.append(weapon)
+
+
+func apply_fireball_upgrades():
+	match fireball_level:
+		1:
+			fireball_damage = 30
+			fireball_speed = 300
+		2:
+			fireball_damage = 35  # Increase damage by 5
+			fireball_speed = 350   # Increase speed
+		3:
+			fireball_damage = 40  # Further increase damage by 5
+			fireball_speed = 400   # Further increase speed
+		4:
+			fireball_damage = 50  # Increase damage by 10
+			fireball_speed = 450   # Further increase speed
+		5:
+			fireball_damage = 60  # Max damage increase
+			fireball_speed = 500   # Max speed increase
 
 func apply_knife_upgrades():
 	match knife_level:

@@ -21,6 +21,7 @@ perm_upgrades="*res://scripts/UpgradesData.gd"
 GlobalTimer="*res://scripts/GlobalTimerManager.gd"
 upgrade_manager="*res://scripts/UpgradeManager.gd"
 BackgroundManager="*res://scripts/handleBG.gd"
+MainMusic="*res://scenes/MainMusic.tscn"
 
 [display]
 

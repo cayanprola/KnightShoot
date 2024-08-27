@@ -17,6 +17,7 @@ var screen_modes = ["Fullscreen", "Windowed"]
 @onready var resolution_option = $PanelContainer/VBoxContainer/HBoxContainer3/ResolutionOption
 @onready var master_volume_slider = $PanelContainer/VBoxContainer/HBoxContainer/VolumeSlider
 @onready var weapons_volume_slider = $PanelContainer/VBoxContainer/HBoxContainer4/VolumeSlider
+@onready var music_volume_slider = $PanelContainer/VBoxContainer/HBoxContainer5/VolumeSlider
 @onready var screen_mode_option = $PanelContainer/VBoxContainer/HBoxContainer2/ModeOption
 @onready var apply_button = $PanelContainer/VBoxContainer/MarginContainer/ApplyButton
 
@@ -57,6 +58,7 @@ func _load_settings():
 		resolution_option.select(resolution_index)
 	else:
 		print("Current resolution not in predefined list.")
+		resolution_option.select(perm_upgrades.resolution_index)
 
 	# Set the current screen mode
 	match current_mode:
@@ -65,17 +67,21 @@ func _load_settings():
 		DisplayServer.WINDOW_MODE_WINDOWED:
 			screen_mode_option.select(1)  # Windowed
 		_:
+			screen_mode_option.select(perm_upgrades.screen_mode_index)
 			print("Unknown screen mode.")
-
+	
 	# Load volume from saved data
 	master_volume_slider.value = perm_upgrades.volume
 	weapons_volume_slider.value = perm_upgrades.weapons_volume
+	music_volume_slider.value = perm_upgrades.music_volume
+
 
 func _on_ApplyButton_pressed():
 	# Save the selected settings
 	perm_upgrades.resolution_index = resolution_option.get_selected_id()
 	perm_upgrades.volume = master_volume_slider.value
 	perm_upgrades.weapons_volume = weapons_volume_slider.value
+	perm_upgrades.music_volume = music_volume_slider.value
 	perm_upgrades.screen_mode_index = screen_mode_option.get_selected_id()
 	perm_upgrades.save_game()
 
@@ -93,17 +99,23 @@ func _apply_resolution():
 func _apply_volume():
 	var master_volume_value = master_volume_slider.value
 	# Map the slider value (0-100) to a dB range, for example, -80 dB to 0 dB
-	var db_value = lerp(-40.0, 0.0, master_volume_value / 100.0)
+	var db_value = lerp(-50.0, 10.0, master_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_value)
 
 	var weapons_volume_value = weapons_volume_slider.value
 	# Map the slider value (0-100) to a dB range, for example, -80 dB to 0 dB
-	var weapons_db_value = lerp(-40.0, 0.0, weapons_volume_value / 100.0)
+	var weapons_db_value = lerp(-50.0, 10.0, weapons_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("WeaponsBus"), weapons_db_value)
-
+	
+	var music_volume_value = music_volume_slider.value
+	# Map the slider value (0-100) to a dB range, for example, -80 dB to 0 dB
+	var music_db_value = lerp(-50.0, 10.0, music_volume_value / 100.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("MusicBus"), music_db_value)
+	
 	# Also save this value in the global upgrades data
 	perm_upgrades.volume = master_volume_value
 	perm_upgrades.weapons_volume = weapons_volume_value
+	perm_upgrades.music_volume = music_volume_value
 	
 	perm_upgrades.save_game()
 

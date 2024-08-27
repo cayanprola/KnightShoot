@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var gem_scene: PackedScene
 @export var mob_damage = 15
 @export var knockback_strength = 100  # Strength of knockback applied when hit
+@export var separation_radius = 50  # Distance to consider for avoidance
 
 var health = 10
 var is_dead = false
@@ -35,30 +36,29 @@ func _physics_process(delta):
 		var jitter = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 10
 		velocity = direction * 120 + jitter
 
-		# Separate from other mobs to avoid getting stuck in a line
-		velocity += _avoid_other_mobs()
+		# Apply a simple avoidance mechanism
+		velocity += _simple_avoidance()
 
 		move_and_slide()
+
+		# Ensure hit animation returns to walk animation if it was played
+		if not is_hit and not animated_sprite.is_playing():
+			animated_sprite.play("Walk")
 	else:
 		print("Player node not found!")
 
-func _avoid_other_mobs() -> Vector2:
-	var separation = Vector2.ZERO
-	var neighbor_count = 0
+func _simple_avoidance() -> Vector2:
 	var mobs = get_tree().get_nodes_in_group("enemies")
-	
+	var avoidance = Vector2.ZERO
+
 	for mob in mobs:
 		if mob != self:
 			var distance = global_position.distance_to(mob.global_position)
-			if distance < 50:  # If another mob is within a certain distance
-				var direction_away = global_position.direction_to(mob.global_position).normalized()
-				separation -= direction_away  # Move away from the other mob
-				neighbor_count += 1
+			if distance < separation_radius:  # Only consider nearby mobs
+				avoidance += (global_position - mob.global_position).normalized() / distance
 
-	if neighbor_count > 0:
-		separation = separation / neighbor_count
-		separation = separation.normalized() * 100  # Strength of the separation force
-	return separation
+	# Normalize and scale the avoidance vector to keep it effective but lightweight
+	return avoidance.normalized() * 50  # Adjust the scale factor as needed
 
 func take_damage(amount, knockback_vector = Vector2.ZERO):
 	if is_dead:
@@ -98,5 +98,6 @@ func _play_hit_animation():
 
 	is_hit = true
 	animated_sprite.play("Hit")
+	await animated_sprite.animation_finished  # Wait for the hit animation to finish
 	is_hit = false
-
+	animated_sprite.play("Walk")

@@ -65,6 +65,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/margin_left = 45
 theme_override_constants/margin_top = 45
+theme_override_constants/margin_bottom = 0
 
 [node name="ReturnButton" type="TextureButton" parent="PanelContainer/MarginContainer2"]
 texture_filter = 1
@@ -175,11 +176,29 @@ size_flags_horizontal = 10
 size_flags_vertical = 4
 value = 50.0
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/separation = 400
+
+[node name="Volume" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer5"]
+texture_filter = 1
+layout_mode = 2
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_psaqd")
+
+[node name="VolumeSlider" type="HSlider" parent="PanelContainer/VBoxContainer/HBoxContainer5"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 50.0
+
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_top = 60
 
 [node name="ApplyButton" type="TextureButton" parent="PanelContainer/VBoxContainer/MarginContainer"]
 texture_filter = 1

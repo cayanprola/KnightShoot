@@ -32,6 +32,7 @@ var resolution_index = 3  # Default to 1920x1080
 var screen_mode_index = 0  # Default to Fullscreen
 var volume = 50  # Default volume
 var weapons_volume = 50
+var music_volume = 50
 
 # Path to save the file
 var save_path = "user://save_game.json"
@@ -67,6 +68,7 @@ func save_game():
 		"screen_mode_index": screen_mode_index,
 		"volume": volume,
 		"weapons_volume": weapons_volume,
+		"music_volume": music_volume,
 	}
 	
 	var file = FileAccess.open(save_path, FileAccess.ModeFlags.WRITE)
@@ -101,10 +103,11 @@ func load_game():
 			move_speed = save_data.get("move_speed", 0)
 			revive = save_data.get("revive", 0)
 			gold = save_data.get("gold", 0)
-			resolution_index = save_data.get("resolution_index", 3)
+			resolution_index = save_data.get("resolution_index", 0)
 			screen_mode_index = save_data.get("screen_mode_index", 0)
-			volume = save_data.get("volume", 50)
-			weapons_volume = save_data.get("weapons_volume", 50)
+			volume = save_data.get("volume", 0)
+			weapons_volume = save_data.get("weapons_volume", 0)
+			music_volume = save_data.get("music_volume", 0)
 		else:
 			print("Error: Save data is not a dictionary.")
 	else:
@@ -183,18 +186,19 @@ func apply_settings():
 	DisplayServer.window_set_size(selected_resolution)
 	print("Resolution set to: ", selected_resolution)
 
-	# Apply volume
-	var db_value = lerp(-40.0, 0.0, volume / 100.0)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_value)
-	print("Master volume set to: ", volume)
-	var weapons_db_value = lerp(-40.0, 0.0, volume / 100.0)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("WeaponsBus"), weapons_db_value)
-	print("Weapons volume set to: ", weapons_db_value)
-	
+	# Apply volume for each bus
+	_apply_volume_to_bus("Master", volume)
+	_apply_volume_to_bus("WeaponsBus", weapons_volume)
+	_apply_volume_to_bus("MusicBus", music_volume)
 
 	# Print current window size and mode for debugging
 	var current_size = DisplayServer.window_get_size()
 	var current_mode = DisplayServer.window_get_mode()
 	print("Current window size: ", current_size)
 	print("Current window mode: ", current_mode)
+
+func _apply_volume_to_bus(bus_name: String, volume_value: float):
+	var db_value = lerp(-50.0, 10.0, volume_value / 100.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), db_value)
+	print(bus_name + " volume set to: ", db_value)
 

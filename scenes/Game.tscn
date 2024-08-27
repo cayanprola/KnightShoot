@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://m4hx1ig8baq0"]
+[gd_scene load_steps=21 format=3 uid="uid://m4hx1ig8baq0"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_67srf"]
 [ext_resource type="PackedScene" uid="uid://bpbxtf4hs8obx" path="res://scenes/PatternMap.tscn" id="2_5piyp"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dnaukp13y0uiq" path="res://scenes/Potion.tscn" id="11_jfcqc"]
 [ext_resource type="PackedScene" uid="uid://b2uopyjutjlrr" path="res://scenes/EndGame.tscn" id="11_pysly"]
 [ext_resource type="PackedScene" uid="uid://cw017vti4gx2u" path="res://scenes/GoldCoin.tscn" id="12_pejgq"]
-[ext_resource type="AudioStream" uid="uid://ch3h4ctradcw4" path="res://assets/5 Action Chiptunes By Juhani Junkala/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="17_4b8f7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c06pf"]
 font = ExtResource("2_t7m6d")
@@ -149,9 +148,5 @@ label_settings = SubResource("LabelSettings_ytert")
 [node name="GlobalTimerManager" parent="." instance=ExtResource("9_ryc8o")]
 potion_scene = ExtResource("11_jfcqc")
 gold_coin_scene = ExtResource("12_pejgq")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("17_4b8f7")
-autoplay = true
 
 [connection signal="pressed" from="GameUI/Control/LevelUpButton" to="Player" method="_on_LevelUpButton_pressed"]
