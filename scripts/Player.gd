@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var purple_laser_scene: PackedScene
 @export var fireball_scene: PackedScene
 @export var knife_scene: PackedScene
-@export var invincibility_time = 0.7
+@export var invincibility_time = 0.5
 @export var max_health = 100
 @export var health = max_health
 @export var health_regen = 0.0
@@ -86,7 +86,7 @@ func apply_permanent_upgrades():
 	health_regen += perm_upgrades.health_regen * 0.2
 	armor += perm_upgrades.armor * 2
 	player_dmg += perm_upgrades.damage * 7.5
-	atk_speed = max(0.1, 1 - perm_upgrades.attack_speed * 0.05)
+	atk_speed += perm_upgrades.attack_speed * 0.05
 	atk_size = 1 + perm_upgrades.attack_size * 0.08
 	move_speed += perm_upgrades.move_speed * 20
 	revive += perm_upgrades.revive * 1
@@ -122,17 +122,22 @@ func _handle_shooting(delta):
 	knife_timer -= delta
 
 	if shoot_timer <= 0:
-		shoot_timer = max(0.1, 1.0 / atk_speed)  # Reduce time between shots with higher attack speed
+		shoot_timer = max(0.8, 5.0 / (0.5 + atk_speed * fireball_level))  # Reduce time between shots with higher attack speed
 		_shoot()
+		print("Atk speed laser timer ", atk_speed, " laser timer ", shoot_timer) 
 
 	if fireball_active and fireball_level > 0 and fireball_timer <= 0:
-		fireball_timer = max(1, 5.0 / (1.0 + atk_speed * fireball_level))  # Reduce time between fireballs with higher attack speed
+		fireball_timer = max(0.9, 5.0 / (0.5 + atk_speed * fireball_level))  # Reduce time between fireballs with higher attack speed
 		_shoot_fireball()
+		print("Atk speed fireball timer ", atk_speed, " fireball timer ", fireball_timer) 
+		
 
 	# Continuous knife shooting
 	if knife_level > 0 and knife_timer <= 0:
-		knife_timer = max(1, 5.0 / (1.0 + atk_speed * knife_level))  # Adjust rate of fire with knife level
+		knife_timer = max(0.8, 5.0 / (0.5 + atk_speed * knife_level))  # Adjust rate of fire with knife level
 		_shoot_knives()
+		print("Atk speed knife timer ", atk_speed, " knife timer ", knife_timer) 
+		
 
 func _handle_shurikens(delta):
 	if shuriken_active and shuriken_level > 0:
@@ -171,6 +176,7 @@ func _shoot():
 		weapon.global_position = global_position + offset
 		weapon.laser_damage += player_dmg  # Set the weapon damage
 		weapon.scale = Vector2(atk_size, atk_size)
+		print("Laser damage: ", weapon.laser_damage)
 		weapon.laser_direction = direction  # Set the direction based on the level
 		get_parent().add_child(weapon)
 
@@ -482,7 +488,7 @@ func upgrade_stat(upgrade_name: String):
 			print("Move Speed level:", move_speed_level, "Move speed:", move_speed)
 		"Attack Speed":
 			attack_speed_level += 1
-			atk_speed -= 0.05
+			atk_speed += 0.1
 			print("Attack Speed level:", attack_speed_level, "Attack speed:", atk_speed)
 
 	# Check if maxed out
@@ -587,7 +593,7 @@ func _shoot_knives():
 		knife.global_position = global_position
 		knife.knife_direction = direction
 		knife.scale = Vector2(atk_size, atk_size)
-		
+		print("Knife damage:", knife.knife_damage)
 		knife.knife_speed = knife_speed  # Set speed based on level
 		knife.knife_damage = knife_damage  # Set damage based on level
 		get_parent().add_child(knife)

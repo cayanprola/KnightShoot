@@ -101,6 +101,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v5e1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khpwy")
 }],
 "loop": false,
 "name": &"Hit",
@@ -136,11 +139,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rqjo4"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h5g4"]
 
 [node name="FlyingEye" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_mag21")
 gem_scene = ExtResource("2_3yudl")
 
@@ -150,9 +153,9 @@ texture_repeat = 1
 position = Vector2(2, 0)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ps8ch")
-animation = &"Death"
+animation = &"Hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, 4)
-scale = Vector2(2.42428, 1.78172)
-shape = SubResource("CircleShape2D_rqjo4")
+position = Vector2(11, 5)
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_5h5g4")

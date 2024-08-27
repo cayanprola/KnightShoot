@@ -140,7 +140,7 @@ animations = [{
 
 [node name="Mushroom" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_bjd7p")
 gem_scene = ExtResource("2_lbf7y")
 
@@ -152,5 +152,5 @@ frame_progress = 0.784804
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 9)
-scale = Vector2(1.88101, 3.45116)
+scale = Vector2(2.3, 2.3)
 shape = SubResource("CircleShape2D_bo37x")

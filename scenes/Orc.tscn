@@ -140,17 +140,18 @@ animations = [{
 
 [node name="Orc" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_tllr8")
 gem_scene = ExtResource("2_8iqd7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(3.5, 3.5)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_an35s")
-animation = &"Death"
+animation = &"Hit"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -2)
-scale = Vector2(2.47521, 3.13112)
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_50ib1")

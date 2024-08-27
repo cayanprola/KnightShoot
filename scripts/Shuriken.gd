@@ -1,6 +1,6 @@
 extends "res://scripts/BaseWeapon.gd"
 
-@export var shuriken_damage = 10
+@export var shuriken_damage = 20
 @export var shuriken_rotation_speed = PI
 @export var shuriken_angle = 0
 @export var orbit_radius = 120

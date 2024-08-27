@@ -1,6 +1,6 @@
 extends "res://scripts/BaseWeapon.gd"
 
-@export var fireball_damage = 10
+@export var fireball_damage = 30
 @export var fireball_speed = 300
 @export var fireball_lifetime = 3.0  # Fireball lasts 3 seconds
 var fireball_direction = Vector2(1, 0)  # Default direction is right

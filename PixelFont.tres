@@ -1,9 +1,9 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://42yruh7l0jag"]
 
-[ext_resource type="FontFile" uid="uid://kd5p401f4xkj" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="1_lukdi"]
+[ext_resource type="FontFile" uid="uid://by0ttegopkj4w" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel Square.ttf" id="1_73vip"]
 
 [resource]
-font = ExtResource("1_lukdi")
-font_size = 64
+font = ExtResource("1_73vip")
+font_size = 44
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)

@@ -107,13 +107,13 @@ func _input(event):
 
 		if cursor_hidden:
 			_show_cursor()
-	#if event.is_action_pressed("toggle_speed"):
-		#if Engine.time_scale == 1.0:
-			#Engine.time_scale = 10.0  # Speed up the game by 5x for faster testing
-			#print("Game speed increased to 5x")
-		#else:
-			#Engine.time_scale = 1.0  # Reset to normal speed
-			#print("Game speed reset to normal")
+	if event.is_action_pressed("toggle_speed"):
+		if Engine.time_scale == 1.0:
+			Engine.time_scale = 10.0  # Speed up the game by 5x for faster testing
+			print("Game speed increased to 5x")
+		else:
+			Engine.time_scale = 1.0  # Reset to normal speed
+			print("Game speed reset to normal")
 
 func _pause_game():
 	_show_cursor()

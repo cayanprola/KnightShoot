@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var death_animation_duration = 0.5
 @export var gem_scene: PackedScene
 @export var mob_damage = 15
+@export var knockback_strength = 100  # Strength of knockback applied when hit
 
 var health = 10
 var is_dead = false
@@ -27,22 +28,39 @@ func _physics_process(delta):
 		return
 
 	if player:
+		# Calculate direction towards the player
 		var direction = global_position.direction_to(player.global_position)
-		velocity = direction * 120
-
+		
 		# Apply a small random offset to avoid mobs clustering in a single line
 		var jitter = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 10
-		velocity += jitter
+		velocity = direction * 120 + jitter
+
+		# Separate from other mobs to avoid getting stuck in a line
+		velocity += _avoid_other_mobs()
 
 		move_and_slide()
 	else:
 		print("Player node not found!")
 
-func _on_body_entered(body):
-	if body.is_in_group("weapons"):
-		body.take_damage(mob_damage)
+func _avoid_other_mobs() -> Vector2:
+	var separation = Vector2.ZERO
+	var neighbor_count = 0
+	var mobs = get_tree().get_nodes_in_group("enemies")
+	
+	for mob in mobs:
+		if mob != self:
+			var distance = global_position.distance_to(mob.global_position)
+			if distance < 50:  # If another mob is within a certain distance
+				var direction_away = global_position.direction_to(mob.global_position).normalized()
+				separation -= direction_away  # Move away from the other mob
+				neighbor_count += 1
 
-func take_damage(amount):
+	if neighbor_count > 0:
+		separation = separation / neighbor_count
+		separation = separation.normalized() * 100  # Strength of the separation force
+	return separation
+
+func take_damage(amount, knockback_vector = Vector2.ZERO):
 	if is_dead:
 		return
 	
@@ -50,8 +68,13 @@ func take_damage(amount):
 	
 	if health > 0:
 		_play_hit_animation()  # Play hit animation if the mob is still alive
+		_apply_knockback(knockback_vector)  # Apply knockback when hit
 	else:
 		kill_mob()
+
+func _apply_knockback(knockback_vector: Vector2):
+	if knockback_vector.length() > 0:
+		velocity += knockback_vector.normalized() * knockback_strength
 
 func kill_mob():
 	if is_dead:
@@ -76,3 +99,4 @@ func _play_hit_animation():
 	is_hit = true
 	animated_sprite.play("Hit")
 	is_hit = false
+

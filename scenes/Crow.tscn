@@ -115,7 +115,7 @@ animations = [{
 
 [node name="Crow" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_jgrtr")
 gem_scene = ExtResource("2_dxwlb")
 
@@ -127,5 +127,5 @@ animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.5)
-scale = Vector2(1.89773, 3.09208)
+scale = Vector2(2.4, 2.4)
 shape = SubResource("CircleShape2D_b2r0g")

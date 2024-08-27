@@ -155,6 +155,7 @@ text = "Quit"
 label_settings = ExtResource("3_keima")
 
 [node name="SettingsPanel" parent="." instance=ExtResource("2_labua")]
+visible = false
 
 [connection signal="pressed" from="PauseControl/PauseContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="PauseControl/PauseContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
