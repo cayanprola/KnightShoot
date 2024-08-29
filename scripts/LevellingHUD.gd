@@ -15,13 +15,13 @@ func _ready():
 
 func show_hud(options: Array):
 	available_options = options
-	populate_options()
 	
-	# Pause the game manually without triggering the pause menu HUD
-	_pause_game_manually()
-	
-	# Show the levelling HUD
-	show()
+	if game.player.all_upgrades_maxed_out():
+		hide()
+	else:
+		populate_options()
+		_pause_game_manually()
+		show()
 
 func populate_options():
 	for child in options_container.get_children():

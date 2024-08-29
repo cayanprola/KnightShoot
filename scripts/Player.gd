@@ -274,8 +274,52 @@ func level_up_player():
 	health = min(max_health, health + 20)
 	health_bar.set_health(health)
 
-	# Emit the level-up signal with available options
-	emit_signal("level_up", get_available_options())
+	print("Checking if all upgrades are maxed out...")
+	if all_upgrades_maxed_out():
+		print("All upgrades are maxed out. Adding gold...")
+		collect_gold(25)
+		
+	else:
+		print("Not all upgrades are maxed out. Showing level-up options...")
+		# Emit the level-up signal with available options
+		print("Emitting level_up signal")
+		emit_signal("level_up", get_available_options())
+
+func all_upgrades_maxed_out() -> bool:
+	print("Checking if all upgrades are maxed out...")
+
+	# If no upgrades have been selected at all, return false
+	if selected_weapons.size() == 0 and selected_stats.size() == 0:
+		print("No upgrades selected. Returning false.")
+		return false
+
+	# Check if all selected weapons have reached their max level
+	if selected_weapons.size() > 0:
+		for weapon in selected_weapons:
+			var weapon_level = get_upgrade_level(weapon["name"])
+			var max_level = upgrade_manager.get_max_level(weapon["name"])
+			print("Weapon:", weapon["name"], "Level:", weapon_level, "Max Level:", max_level)
+			if weapon_level < max_level:
+				print("Returning false: Weapon not maxed out.")
+				return false
+	else:
+		print("No weapons selected.")
+
+	# Check if all selected stats have reached their max level
+	if selected_stats.size() > 0:
+		for stat in selected_stats:
+			var stat_level = get_upgrade_level(stat["name"])
+			var max_level = upgrade_manager.get_max_level(stat["name"])
+			print("Stat:", stat["name"], "Level:", stat_level, "Max Level:", max_level)
+			if stat_level < max_level:
+				print("Returning false: Stat not maxed out.")
+				return false
+	else:
+		print("No stats selected.")
+
+	print("All upgrades are maxed out. Returning true.")
+	return true
+
 
 func handle_revive():
 	if revive > 0:
@@ -387,6 +431,8 @@ func get_available_options() -> Array:
 	return options
 
 func upgrade_stat(upgrade_name: String):
+	print("Upgrading:", upgrade_name)
+	
 	var max_level = upgrade_manager.get_max_level(upgrade_name)
 	var level = get_upgrade_level(upgrade_name)
 	
@@ -425,11 +471,17 @@ func upgrade_stat(upgrade_name: String):
 			if selected_weapons.size() < max_weapons:
 				selected_weapons.append({"name": upgrade_name, "icon": icon})
 				is_new_selection = true
+				print("Added weapon:", upgrade_name)
 	else:  # Stat upgrades
 		if not selected_stats.has({"name": upgrade_name, "icon": icon}):
 			if selected_stats.size() < max_stats:
 				selected_stats.append({"name": upgrade_name, "icon": icon})
 				is_new_selection = true
+				print("Added stat:", upgrade_name)
+
+	# Print current state after selection
+	print("Selected Weapons After Upgrade:", selected_weapons)
+	print("Selected Stats After Upgrade:", selected_stats)
 
 	# Only update the HUD if this is a new selection
 	if is_new_selection:
