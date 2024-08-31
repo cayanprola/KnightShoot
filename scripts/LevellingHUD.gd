@@ -3,15 +3,19 @@ extends CanvasLayer
 signal option_selected(option: Dictionary)
 signal skip_selected()
 
+@export var max_skips = 3  # Maximum number of skips allowed
 @onready var options_container = $Control/PanelContainer/VBoxContainer/OptionsContainer
-@onready var skip_button = $Control/PanelContainer/Control/MarginContainer/Skip
+@onready var skip_button = $Control/PanelContainer/Control/MarginContainer/VBoxContainer/Skip
 @onready var level_up_label = $Control/PanelContainer/VBoxContainer/MarginContainer/LevelUpLabel
+@onready var skips_remaining_label = $Control/PanelContainer/Control/MarginContainer/VBoxContainer/RemainingLabel
 @onready var game = get_tree().get_root().get_node("Game")
+var skips_remaining = max_skips
 var available_options = []
 
 func _ready():
 	hide()
 	skip_button.connect("pressed", Callable(self, "_on_skip_button_pressed"))
+	update_skip_label()
 
 func show_hud(options: Array):
 	available_options = options
@@ -43,6 +47,13 @@ func _on_option_selected(option_data):
 	_resume_game_manually()
 
 func _on_skip_button_pressed():
+	skips_remaining -= 1
+	update_skip_label()
+
+	if skips_remaining <= 0:
+		skip_button.hide()
+		skips_remaining_label.hide()
+
 	emit_signal("skip_selected")
 	
 	# Hide the levelling HUD and resume the game
@@ -63,3 +74,6 @@ func _resume_game_manually():
 	GlobalTimer.resume_spawn()
 	GlobalTimer.start_fireball_timer()
 	GlobalTimer.start_shuriken_timer()
+
+func update_skip_label():
+	skips_remaining_label.text = "Skips remaining: %d" % skips_remaining

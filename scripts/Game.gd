@@ -32,6 +32,9 @@ func _ready():
 	levelling_hud.connect("option_selected", Callable(self, "_on_option_selected"))
 	update_gold_display()
 	
+	levelling_hud.skips_remaining = levelling_hud.max_skips 
+	levelling_hud.update_skip_label()
+	
 	inactivity_timer = Timer.new()
 	inactivity_timer.wait_time = inactivity_time
 	inactivity_timer.one_shot = true
