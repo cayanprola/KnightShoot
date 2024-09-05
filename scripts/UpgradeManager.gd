@@ -8,7 +8,7 @@ var upgrades = {
 			"+1 Projectile Count.",
 			"+10 Damage.\n+10 Speed.",
 			"+1 Projectile Count.\n+10 Damage.\n+20 Speed.",
-			"+10 Damage.\n+10 Speed.",
+			"+10 Damage.\n+20 Speed.",
 			"+1 Projectile Count."
 		],
 		"max_level": 5
@@ -56,10 +56,10 @@ var upgrades = {
 	"Fireball": {
 		"descriptions": [
 			"Unlocks the Fireball.",
-			"Increased rate of fire.",
-			"+1 Projectile Count.",
-			"Increased rate of fire.",
-			"+1 Projectile Count."
+			"+10 Damage.\n+30 Projectile Speed.",
+			"+1 Projectile Count.\n+10 Damage.\n+50 Projectile Speed.",
+			"+10 Damage.\n+50 Projectile Speed.",
+			"+1 Projectile Count.\n+10 Damage.\n+50 Projectile Speed."
 		],
 		"max_level": 5
 	},

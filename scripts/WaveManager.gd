@@ -17,9 +17,9 @@ func _ready():
 	waves = [
 		{
 			"mobs": [preload("res://scenes/FlyingEye.tscn")],
-			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 20 },
-			"spawn_interval": 0.8,
-			"max_wave_mobs": 200,
+			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 30 },
+			"spawn_interval": 1,
+			"max_wave_mobs": 250,
 			"max_mobs": 600,
 			"duration": 60
 		},
@@ -27,37 +27,37 @@ func _ready():
 			"mobs": [preload("res://scenes/Crow.tscn")],
 			"mob_health": { preload("res://scenes/Crow.tscn"): 60 },
 			"spawn_interval": 0.35,
-			"max_wave_mobs": 200,
+			"max_wave_mobs": 300,
 			"max_mobs": 350,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Orc.tscn")],
-			"mob_health": { preload("res://scenes/Orc.tscn"): 110 },
+			"mob_health": { preload("res://scenes/Orc.tscn"): 140 },
 			"spawn_interval": 0.4,
-			"max_wave_mobs": 200,
+			"max_wave_mobs": 300,
 			"max_mobs": 400,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Necromancer.tscn")],
-			"mob_health": { preload("res://scenes/Necromancer.tscn"): 150 },
+			"mob_health": { preload("res://scenes/Necromancer.tscn"): 250 },
 			"spawn_interval": 0.5,
 			"max_wave_mobs": 300,
-			"max_mobs": 600,
+			"max_mobs": 1000,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/FlyingEye.tscn")],
-			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 40 },
-			"spawn_interval": 0.25,
+			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 50 },
+			"spawn_interval": 0.10,
 			"max_wave_mobs": 700,
-			"max_mobs": 600,
+			"max_mobs": 1000,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Skeleton.tscn")],
-			"mob_health": { preload("res://scenes/Skeleton.tscn"): 120 },
+			"mob_health": { preload("res://scenes/Skeleton.tscn"): 160 },
 			"spawn_interval": 0.3,
 			"max_wave_mobs": 300,
 			"max_mobs": 600,
@@ -65,35 +65,35 @@ func _ready():
 		},
 		{
 			"mobs": [preload("res://scenes/Crow.tscn")],
-			"mob_health": { preload("res://scenes/Crow.tscn"): 80 },
-			"spawn_interval": 0.3,
+			"mob_health": { preload("res://scenes/Crow.tscn"): 160 },
+			"spawn_interval": 0.2,
 			"max_wave_mobs": 500,
 			"max_mobs": 600,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Mushroom.tscn")],
-			"mob_health": { preload("res://scenes/Mushroom.tscn"): 100 },
-			"spawn_interval": 0.2,
+			"mob_health": { preload("res://scenes/Mushroom.tscn"): 120 },
+			"spawn_interval": 0.05,
 			"max_wave_mobs": 500,
 			"max_mobs": 600,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Orc.tscn")],
-			"mob_health": { preload("res://scenes/Orc.tscn"):110 },
-			"spawn_interval": 0.2,
+			"mob_health": { preload("res://scenes/Orc.tscn"):120 },
+			"spawn_interval": 0.1,
 			"max_wave_mobs": 400,
 			"max_mobs": 600,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/OldGuardian.tscn")],
-			"mob_health": { preload("res://scenes/OldGuardian.tscn"): 400 },
-			"spawn_interval": 0.5,
-			"max_wave_mobs": 200,
+			"mob_health": { preload("res://scenes/OldGuardian.tscn"): 800 },
+			"spawn_interval": 0.3,
+			"max_wave_mobs": 300,
 			"max_mobs": 600,
-			"duration": 60
+			"duration": 100
 		},
 	]
 

@@ -9,10 +9,10 @@ extends CharacterBody2D
 @export var health = max_health
 @export var health_regen = 0.0
 @export var armor = 0.0
-@export var player_dmg = 10
+@export var player_dmg = 0
 @export var atk_speed = 1
 @export var atk_size = 1
-@export var move_speed = 250
+@export var move_speed = 260
 @export var revive = 0
 
 @export var experience = 0
@@ -51,12 +51,12 @@ var shuriken_active = false
 var shuriken_rotation_speed = PI
 var shuriken_orbit_radius = 90
 var fireball_timer = 0.0
-var fireball_damage = 30
-var fireball_speed = 300
+var fireball_damage = 0
+var fireball_speed = 0
 var fireball_active = false
 var fireball = []
-var knife_speed = 400
-var knife_damage = 10
+var knife_speed = 0
+var knife_damage = 0
 
 @export var max_weapons = 4
 @export var max_stats = 4
@@ -72,8 +72,8 @@ func _ready():
 	add_to_group("player")
 	print(upgrades_hud)
 	apply_permanent_upgrades()  # Apply permanent upgrades first
-	health_bar.set_max_health(max_health)  # Update the health bar with max health
-	health = max_health  # Set health to max health initially
+	health_bar.set_max_health(max_health)
+	health = max_health
 	health_bar.set_health(health)  # Set initial health in health bar
 	xp_bar = get_tree().get_root().get_node("Game/GameUI/Control/XPBarContainer/XPBar")
 	xp_bar.max_value = experience_next_lvl  # Set XP bar max value
@@ -82,18 +82,6 @@ func _ready():
 	GlobalTimer.start_shuriken_timer()
 	GlobalTimer.connect("fireball_timeout", Callable(self, "_toggle_fireball"))
 	GlobalTimer.start_fireball_timer()
-
-func apply_permanent_upgrades():
-	max_health = 100 + perm_upgrades.max_health * 20
-	health_regen += perm_upgrades.health_regen * 0.2
-	armor += perm_upgrades.armor * 2
-	player_dmg += perm_upgrades.damage * 7.5
-	atk_speed += perm_upgrades.attack_speed * 0.05
-	atk_size = 1 + perm_upgrades.attack_size * 0.08
-	move_speed += perm_upgrades.move_speed * 20
-	revive += perm_upgrades.revive * 1
-	health_bar.set_max_health(max_health)
-	health = min(health, max_health)
 
 func _physics_process(delta):
 	if is_dead:
@@ -118,13 +106,25 @@ func _update_state():
 		else:
 			animated_sprite.play("Idle")
 
+func apply_permanent_upgrades():
+	max_health = 100 + perm_upgrades.max_health * 20
+	health_regen += perm_upgrades.health_regen * 0.2
+	armor += perm_upgrades.armor * 2
+	player_dmg += perm_upgrades.damage * 5
+	atk_speed += perm_upgrades.attack_speed * 0.05
+	atk_size = 1 + perm_upgrades.attack_size * 0.08
+	move_speed += perm_upgrades.move_speed * 25
+	revive += perm_upgrades.revive * 1
+	health_bar.set_max_health(max_health)
+	health = min(health, max_health)
+
 func _handle_shooting(delta):
 	shoot_timer -= delta
 	fireball_timer -= delta
 	knife_timer -= delta
 
 	if shoot_timer <= 0:
-		shoot_timer = max(0.75, 1.5 / (0.5 + atk_speed ))  # Reduce time between shots with higher attack speed
+		shoot_timer = max(0.7, 1.5 / (0.5 + atk_speed ))  # Reduce time between shots with higher attack speed
 		_shoot()
 		print("Atk speed laser timer ", atk_speed, " laser timer ", shoot_timer) 
 
@@ -160,34 +160,51 @@ func _shoot():
 
 	# Instantiate and set up lasers for each direction
 	for direction in directions:
-		var weapon = purple_laser_scene.instantiate()
+		var laser_instance = purple_laser_scene.instantiate()
 		var offset = Vector2(45, 0)
 		
 		if direction == Vector2(1, 0):  # Right
-			weapon.rotation_degrees = 0
+			laser_instance.rotation_degrees = 0
 		elif direction == Vector2(-1, 0):  # Left
-			weapon.rotation_degrees = 180
+			laser_instance.rotation_degrees = 180
 			offset = Vector2(-45, 0)
 		elif direction == Vector2(0, -1):  # Up
-			weapon.rotation_degrees = -90
+			laser_instance.rotation_degrees = -90
 			offset = Vector2(0, -45)
 		elif direction == Vector2(0, 1):  # Down
-			weapon.rotation_degrees = 90
+			laser_instance.rotation_degrees = 90
 			offset = Vector2(0, 45)
 		
-		weapon.global_position = global_position + offset
-		weapon.laser_damage += player_dmg  # Set the weapon damage
-		weapon.scale = Vector2(atk_size, atk_size)
-		print("Laser damage: ", weapon.laser_damage)
-		weapon.laser_direction = direction  # Set the direction based on the level
-		get_parent().add_child(weapon)
+		# Apply specific level-based attributes
+		if purple_laser_level >= 2:
+			laser_instance.laser_damage += 10
+			laser_instance.laser_speed += 10
+			print("Level 2+ damage and speed applied.")
+			
+		if purple_laser_level >= 3:
+			laser_instance.laser_damage += 10
+			laser_instance.laser_speed += 20
+			print("Level 3+ damage and speed applied.")
+
+		if purple_laser_level >= 4:
+			laser_instance.laser_damage += 10
+			laser_instance.laser_speed += 20
+			print("Level 4+ damage and speed applied.")
+		
+		laser_instance.global_position = global_position + offset
+		laser_instance.laser_damage += player_dmg
+		laser_instance.scale = Vector2(atk_size, atk_size)
+		print("Laser damage after player damage added: ", laser_instance.laser_damage)
+		print("Laser speed after all upgrades: ", laser_instance.laser_speed)
+		laser_instance.laser_direction = direction  # Set the direction based on the level
+		get_parent().add_child(laser_instance)
+
 
 func _get_random_enemy() -> Node2D:
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	if enemies.size() > 0:
 		return enemies[randi() % enemies.size()]
 	return null
-
 
 func _take_damage(amount):
 	if is_dead or invincible:
@@ -545,6 +562,7 @@ func _toggle_shuriken(active: bool):
 	shuriken_active = active
 	if shuriken_active:
 		_spawn_shurikens()
+		
 	else:
 		_deactivate_shurikens()
 
@@ -561,19 +579,19 @@ func apply_shuriken_upgrades():
 	
 	match shuriken_level:
 		1:
-			shuriken_rotation_speed = PI  # Default speed at level 1
+			shuriken_rotation_speed = PI
 			_spawn_single_shuriken(0)
 		2:
-			shuriken_rotation_speed = PI # Increase speed at level 2
+			shuriken_rotation_speed = PI
 			_spawn_single_shuriken(0)
 		3:
-			shuriken_rotation_speed = PI  # Keep the speed from level 2
+			shuriken_rotation_speed = PI
 			_spawn_single_shuriken(0)
 		4:
-			shuriken_rotation_speed = PI * 1.5  # Increase speed at level 4
+			shuriken_rotation_speed = PI * 1.5
 			_spawn_single_shuriken(0)
 		5:
-			shuriken_rotation_speed = PI * 2.2  # Increase speed
+			shuriken_rotation_speed = PI * 2.2
 			_spawn_single_shuriken(0)
 			_spawn_single_shuriken(PI * 2 / 3)  # Second shuriken, 120 degrees apart
 			_spawn_single_shuriken(4 * PI / 3)  # Third shuriken, 240 degrees apart
@@ -602,6 +620,7 @@ func _spawn_single_shuriken(angle_offset: float):
 	
 	# Add shuriken as a child of the player
 	add_child(shuriken)
+	print("Shuriken damage: ", shuriken.shuriken_damage)
 	
 	# Store references
 	shurikens.append(shuriken)
@@ -627,14 +646,16 @@ func _shoot_knives():
 	for i in range(knife_count):
 		var angle_offset = i * (PI * 2 / knife_count) + base_angle
 		var direction = Vector2(cos(angle_offset), sin(angle_offset))
-		var knife = knife_scene.instantiate()
-		knife.global_position = global_position
-		knife.knife_direction = direction
-		knife.scale = Vector2(atk_size, atk_size)
-		print("Knife damage:", knife.knife_damage)
-		knife.knife_speed = knife_speed  # Set speed based on level
-		knife.knife_damage = knife_damage  # Set damage based on level
-		get_parent().add_child(knife)
+		var knife_instance = knife_scene.instantiate()
+		knife_instance.global_position = global_position
+		knife_instance.knife_direction = direction
+		knife_instance.scale = Vector2(atk_size, atk_size)
+		knife_instance.knife_speed += knife_speed  # Set speed based on level
+		knife_instance.knife_damage += knife_damage + player_dmg  # Set damage based on level
+		print("Knife damage: ", knife_instance.knife_damage)
+		print("Knife speed: ", knife_instance.knife_speed)
+		print("Knife level: ", knife_level)
+		get_parent().add_child(knife_instance)
 
 func _shoot_fireball():
 	var fireball_count = min(3, (fireball_level + 1) / 2)  # Determine number of fireballs
@@ -644,52 +665,47 @@ func _shoot_fireball():
 		var target = _get_random_enemy()
 		if target:
 			var direction = (target.global_position - global_position).normalized()
-			var weapon = fireball_scene.instantiate()
-			weapon.global_position = global_position
-			weapon.fireball_damage = fireball_damage  # Set the damage from the upgraded values
-			weapon.fireball_speed = fireball_speed    # Set the speed from the upgraded values
-			weapon.scale = Vector2(atk_size, atk_size)
-			weapon.rotation = direction.angle()
-			weapon.fireball_direction = direction  # Set the direction based on the target
-			print("Fireball damage:", weapon.fireball_damage, " Fireball speed:", weapon.fireball_speed)
-			get_parent().add_child(weapon)
-			fireball.append(weapon)
+			var fireball_instance = fireball_scene.instantiate()
+			fireball_instance.global_position = global_position
+			fireball_instance.fireball_damage += fireball_damage + player_dmg  # Set the damage from the upgraded values
+			fireball_instance.fireball_speed += fireball_speed    # Set the speed from the upgraded values
+			fireball_instance.scale = Vector2(atk_size, atk_size)
+			fireball_instance.rotation = direction.angle()
+			fireball_instance.fireball_direction = direction  # Set the direction based on the target
+			print("Fireball damage:", fireball_instance.fireball_damage, " Fireball speed:", fireball_instance.fireball_speed)
+			get_parent().add_child(fireball_instance)
+			fireball.append(fireball_instance)
 
 
 func apply_fireball_upgrades():
 	match fireball_level:
-		1:
-			fireball_damage = 30
-			fireball_speed = 300
 		2:
-			fireball_damage = 35  # Increase damage by 5
-			fireball_speed = 350   # Increase speed
+			fireball_damage += 10
+			fireball_speed += 30
 		3:
-			fireball_damage = 40  # Further increase damage by 5
-			fireball_speed = 400   # Further increase speed
+			fireball_damage += 10
+			fireball_speed += 50
 		4:
-			fireball_damage = 50  # Increase damage by 10
-			fireball_speed = 450   # Further increase speed
+			fireball_damage += 10
+			fireball_speed += 50
 		5:
-			fireball_damage = 60  # Max damage increase
-			fireball_speed = 500   # Max speed increase
+			fireball_damage += 10
+			fireball_speed += 50
 
 func apply_knife_upgrades():
 	match knife_level:
-		1:
-			knife_speed = 400
 		2:
 			knife_damage += 5
-			knife_speed = 450
+			knife_speed += 50
 		3:
-			knife_speed = 500
-			knife_damage += 5
+			knife_damage += 10
+			knife_speed += 50
 		4:
-			knife_speed = 550
 			knife_damage += 5
+			knife_speed += 50
 		5:
-			knife_speed = 600
-			knife_damage += 5
+			knife_damage += 10
+			knife_speed += 50
 
 func _on_LevelUpButton_pressed():
 	add_experience(experience_next_lvl)

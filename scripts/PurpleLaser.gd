@@ -7,9 +7,6 @@ extends "res://scripts/BaseWeapon.gd"
 
 func _ready():
 	add_to_group("weapons")
-	#if shot_sound == null:
-		#shot_sound = $AudioStreamPlayer2D
-	#play_shot_sound()
 	connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _physics_process(delta):
