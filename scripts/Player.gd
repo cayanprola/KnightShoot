@@ -530,7 +530,7 @@ func upgrade_stat(upgrade_name: String):
 			print("Health level:", health_level, "Max health:", max_health)
 		"Health Regen":
 			health_regen_level += 1
-			health_regen += 0.1
+			health_regen += 0.08
 			print("Health Regen level:", health_regen_level, "Health regen:", health_regen)
 		"Damage":
 			damage_level += 1
@@ -538,7 +538,7 @@ func upgrade_stat(upgrade_name: String):
 			print("Damage level:", damage_level, "Player damage:", player_dmg)
 		"Move Speed":
 			move_speed_level += 1
-			move_speed += 10
+			move_speed += 20
 			print("Move Speed level:", move_speed_level, "Move speed:", move_speed)
 		"Attack Speed":
 			attack_speed_level += 1

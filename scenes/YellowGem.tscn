@@ -47,7 +47,7 @@ xp_value = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q50cc")
-frame_progress = 0.319721
+frame_progress = 0.275829
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.52, 0.72)
