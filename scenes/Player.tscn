@@ -203,17 +203,18 @@ knife_scene = ExtResource("5_bjt0v")
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_nm8cm")
-animation = &"Hit"
+animation = &"Walk"
 speed_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, -4)
+position = Vector2(-1, -4)
 scale = Vector2(1.29961, 1.75551)
 shape = SubResource("CircleShape2D_7yqpi")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

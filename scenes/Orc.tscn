@@ -148,9 +148,7 @@ gem_scene = ExtResource("2_8iqd7")
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_an35s")
-animation = &"Hit"
-frame = 3
-frame_progress = 1.0
+animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)

@@ -147,7 +147,6 @@ collision_mask = 8
 script = ExtResource("1_mag21")
 death_animation_duration = 0.4
 gem_scene = ExtResource("2_3yudl")
-knockback_strength = 500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

@@ -118,7 +118,6 @@ collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_jgrtr")
 gem_scene = ExtResource("2_dt7b5")
-knockback_strength = 500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
