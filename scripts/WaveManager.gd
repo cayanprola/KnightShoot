@@ -1,8 +1,7 @@
 extends Node
 
 @export var waves = []
-@export var player_path: NodePath = "/root/Game/Player"
-@onready var player = get_node(player_path)
+@onready var player = get_tree().get_root().get_node("Game/Player")
 @onready var mob_spawner = $"../MobSpawner"
 
 var current_wave_index = 0
