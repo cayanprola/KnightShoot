@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://m4hx1ig8baq0"]
+[gd_scene load_steps=19 format=3 uid="uid://m4hx1ig8baq0"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_67srf"]
 [ext_resource type="PackedScene" uid="uid://bpbxtf4hs8obx" path="res://scenes/PatternMap.tscn" id="2_5piyp"]
@@ -14,9 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b43lgj5ltw4c6" path="res://scenes/PauseMenu.tscn" id="8_fvsre"]
 [ext_resource type="PackedScene" uid="uid://0ttlxw1xsrl0" path="res://scenes/XP_bar.tscn" id="8_jxx0y"]
 [ext_resource type="PackedScene" uid="uid://8wekor8bddds" path="res://scenes/GlobalTimerManager.tscn" id="9_ryc8o"]
-[ext_resource type="PackedScene" uid="uid://dnaukp13y0uiq" path="res://scenes/Potion.tscn" id="11_jfcqc"]
 [ext_resource type="PackedScene" uid="uid://b2uopyjutjlrr" path="res://scenes/EndGame.tscn" id="11_pysly"]
-[ext_resource type="PackedScene" uid="uid://cw017vti4gx2u" path="res://scenes/GoldCoin.tscn" id="12_pejgq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c06pf"]
 font = ExtResource("2_t7m6d")
@@ -43,8 +41,9 @@ script = ExtResource("1_67srf")
 floor_constant_speed = true
 
 [node name="MobSpawner" parent="." instance=ExtResource("5_aqewm")]
-min_spawn_radius = 300
-max_spawn_radius = 1400
+min_spawn_radius = 350
+max_spawn_radius = 1500
+base_spawn_interval = 0.9
 
 [node name="WaveManager" parent="." instance=ExtResource("5_wb7rp")]
 
@@ -147,7 +146,5 @@ label_settings = SubResource("LabelSettings_ytert")
 [node name="EndGame" parent="." instance=ExtResource("11_pysly")]
 
 [node name="GlobalTimerManager" parent="." instance=ExtResource("9_ryc8o")]
-potion_scene = ExtResource("11_jfcqc")
-gold_coin_scene = ExtResource("12_pejgq")
 
 [connection signal="pressed" from="GameUI/Control/LevelUpButton" to="Player" method="_on_LevelUpButton_pressed"]

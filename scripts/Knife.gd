@@ -9,7 +9,7 @@ func _ready():
 	add_to_group("weapons")
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	rotate_knife_to_direction()
-	GlobalTimer.start_weapon_timer(get_instance_id(), 3.0)  # Set a 5-second timer for the knife
+	GlobalTimer.start_weapon_timer(get_instance_id(), 3.5)  # Set a 3.5 second timer for the knife lifetime
 
 func _physics_process(delta):
 	global_position += knife_direction * knife_speed * delta

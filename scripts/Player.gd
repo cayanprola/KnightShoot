@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var player_dmg = 0
 @export var atk_speed = 1
 @export var atk_size = 1
-@export var move_speed = 260
+@export var move_speed = 255
 @export var revive = 0
 
 @export var experience = 0
@@ -129,14 +129,13 @@ func _handle_shooting(delta):
 		print("Atk speed laser timer ", atk_speed, " laser timer ", shoot_timer) 
 
 	if fireball_active and fireball_level > 0 and fireball_timer <= 0:
-		fireball_timer = max(0.9, 5.0 / (0.5 + atk_speed))  # Reduce time between fireballs with higher attack speed
+		fireball_timer = max(0.9, 3.5 / (0.5 + atk_speed))  # Reduce time between fireballs with higher attack speed
 		_shoot_fireball()
 		print("Atk speed fireball timer ", atk_speed, " fireball timer ", fireball_timer) 
-		
 
 	# Continuous knife shooting
 	if knife_level > 0 and knife_timer <= 0:
-		knife_timer = max(0.8, 5.0 / (0.5 + atk_speed))  # Adjust rate of fire with knife level
+		knife_timer = max(0.8, 4 / (0.5 + atk_speed))
 		_shoot_knives()
 		print("Atk speed knife timer ", atk_speed, " knife timer ", knife_timer) 
 		
@@ -650,8 +649,8 @@ func _shoot_knives():
 		knife_instance.global_position = global_position
 		knife_instance.knife_direction = direction
 		knife_instance.scale = Vector2(atk_size, atk_size)
-		knife_instance.knife_speed += knife_speed  # Set speed based on level
-		knife_instance.knife_damage += knife_damage + player_dmg  # Set damage based on level
+		knife_instance.knife_speed += knife_speed
+		knife_instance.knife_damage += knife_damage + player_dmg
 		print("Knife damage: ", knife_instance.knife_damage)
 		print("Knife speed: ", knife_instance.knife_speed)
 		print("Knife level: ", knife_level)

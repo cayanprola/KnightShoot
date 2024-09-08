@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://8wekor8bddds"]
+[gd_scene load_steps=4 format=3 uid="uid://8wekor8bddds"]
 
 [ext_resource type="Script" path="res://scripts/GlobalTimerManager.gd" id="1_dw405"]
+[ext_resource type="PackedScene" uid="uid://dnaukp13y0uiq" path="res://scenes/Potion.tscn" id="2_20027"]
+[ext_resource type="PackedScene" uid="uid://cw017vti4gx2u" path="res://scenes/GoldCoin.tscn" id="3_vhqi4"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_dw405")
+potion_scene = ExtResource("2_20027")
+gold_coin_scene = ExtResource("3_vhqi4")

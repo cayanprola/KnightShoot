@@ -12,9 +12,9 @@ var is_paused: bool = false
 
 @export var potion_scene: PackedScene
 @export var gold_coin_scene: PackedScene
-@export var spawn_radius: float = 800.0  # Radius within which items will spawn around the player
-@export var min_spawn_time: float = 10.0  # Minimum spawn time in seconds
-@export var max_spawn_time: float = 45.0  # Maximum spawn time in seconds
+@export var spawn_radius: float = 1200.0
+@export var min_spawn_time: float = 20.0
+@export var max_spawn_time: float = 60.0
 
 signal fireball_timeout()
 signal shuriken_timeout()
@@ -148,7 +148,7 @@ func spawn_item_randomly():
 func _get_random_item() -> Area2D:
 	if not potion_scene or not gold_coin_scene:
 		print("Scenes not assigned!")
-		return null  # Return early if scenes are not assigned to prevent errors
+		return null  # Return to prevent errors
 
 	if randi() % 2 == 0:
 		return potion_scene.instantiate() as Area2D

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@export var death_animation_duration = 0.5
+@export var death_animation_duration = 0.4
 @export var gem_scene: PackedScene
 @export var mob_damage = 15
 @export var separation_radius = 50
@@ -19,7 +19,6 @@ func _ready():
 	else:
 		add_to_group("enemies")
 		
-	collision_shape.set_deferred("disabled", false)  # Ensure collision is enabled
 	animated_sprite.play("Walk")
 
 func _physics_process(delta):
@@ -58,7 +57,7 @@ func _avoidance() -> Vector2:
 	# Normalize and scale the avoidance vector to keep it effective
 	return avoidance.normalized() * 50
 
-func take_damage(amount, knockback_vector = Vector2.ZERO):
+func take_damage(amount):
 	if is_dead:
 		return
 	
@@ -88,7 +87,7 @@ func _drop_gem():
 func _play_hit_animation():
 	if is_hit or is_dead:
 		return
-
+	
 	is_hit = true
 	animated_sprite.play("Hit")
 	await animated_sprite.animation_finished  # Wait for the hit animation to finish to play walk again

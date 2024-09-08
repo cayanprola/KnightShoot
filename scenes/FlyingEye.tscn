@@ -101,9 +101,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v5e1w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_khpwy")
 }],
 "loop": false,
 "name": &"Hit",
@@ -145,7 +142,6 @@ animations = [{
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_mag21")
-death_animation_duration = 0.4
 gem_scene = ExtResource("2_3yudl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -154,7 +150,7 @@ texture_repeat = 1
 position = Vector2(2, 0)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ps8ch")
-animation = &"Death"
+animation = &"Hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11, 5)

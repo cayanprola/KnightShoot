@@ -43,6 +43,7 @@ animations = [{
 radius = 5.55555
 
 [node name="BlueXpGem" type="Area2D"]
+texture_filter = 1
 scale = Vector2(2, 2)
 collision_layer = 16
 script = ExtResource("1_og8tf")
