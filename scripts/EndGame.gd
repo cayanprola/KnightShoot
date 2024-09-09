@@ -16,16 +16,16 @@ func show_endgame_menu():
 	get_tree().paused = true
 
 func _on_PlayAgain_pressed():
-	get_tree().paused = false  # Ensure the game is unpaused before changing scenes	
+	get_tree().paused = false  # Ensure the game is unpaused before changing scenes
 	perm_upgrades.save_game()
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")
 
 func _on_Upgrades_pressed():
-	get_tree().paused = false  # Ensure the game is unpaused before changing scenes
+	get_tree().paused = false
 	perm_upgrades.save_game()
 	get_tree().change_scene_to_file("res://scenes/Upgrades.tscn")
 
 func _on_Quit_pressed():
-	get_tree().paused = false  # Ensure the game is unpaused before changing scenes
+	get_tree().paused = false
 	perm_upgrades.save_game()
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

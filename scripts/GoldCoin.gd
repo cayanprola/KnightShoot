@@ -14,7 +14,6 @@ func _on_body_entered(body):
 		var gold_amount = randi_range(min_gold, max_gold)
 		print("Gold Collected: ", gold_amount)
 		gold_audio.play()
-		body.emit_signal("gold_collected", gold_amount)  # Emit signal with the gold amount
-		
+		body.emit_signal("gold_collected", gold_amount)  # Emit signal with the gold amount to the game
 		queue_free()
 

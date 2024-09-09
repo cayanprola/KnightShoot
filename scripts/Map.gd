@@ -24,6 +24,7 @@ func _process(delta):
 		player_position_in_tiles = new_player_position_in_tiles
 		_update_map()
 
+# Update the map with the chunks
 func _update_map():
 	var current_chunk = _get_chunk_position(player_position_in_tiles)
 	
@@ -41,21 +42,25 @@ func _get_chunk_position(tile_position: Vector2) -> Vector2:
 		int(tile_position.y / chunk_size.y)
 	)
 
+# Instantiace the pattern scene
 func _instance_pattern(chunk_pos: Vector2):
 	var pattern_scene = load(pattern_scene_path)
+	if not pattern_scene:
+		print("Failed to load pattern scene at path: ", pattern_scene_path)
+		return
+
 	var pattern_instance = pattern_scene.instantiate()
+	if not pattern_instance:
+		print("Failed to instantiate pattern scene.")
+		return
 
-	# Calculate the world position for the chunk
+	# Calculate and set the world position for the chunk
 	var world_position = chunk_pos * chunk_size * tile_size
-	
-	# Adjust the position based on the pattern's size to avoid overlapping
 	pattern_instance.position = world_position
-
-	# Add the pattern to the Map node
 	add_child(pattern_instance)
-	
-	# Mark this chunk as generated
 	generated_chunks[chunk_pos] = pattern_instance
+	print("Pattern instanced at ", world_position)
+
 
 func _unload_distant_chunks(current_chunk: Vector2):
 	var chunks_to_unload = []

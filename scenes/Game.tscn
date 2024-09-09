@@ -41,9 +41,7 @@ script = ExtResource("1_67srf")
 floor_constant_speed = true
 
 [node name="MobSpawner" parent="." instance=ExtResource("5_aqewm")]
-min_spawn_radius = 350
-max_spawn_radius = 1500
-base_spawn_interval = 0.9
+max_spawn_radius = 900.0
 
 [node name="WaveManager" parent="." instance=ExtResource("5_wb7rp")]
 
@@ -79,7 +77,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="LevelUpButton" type="Button" parent="GameUI/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

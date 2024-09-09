@@ -16,7 +16,6 @@ extends Control
 
 
 func update_hud(selected_weapons: Array, selected_stats: Array):
-	# Clear all icons first
 	for icon in weapon_icons:
 		icon.texture = null
 	for icon in stat_icons:
@@ -26,14 +25,13 @@ func update_hud(selected_weapons: Array, selected_stats: Array):
 	var weapon_slot_index = 0
 	var stat_slot_index = 0
 
-	# Update weapon icons
+	# Update icons for slots
 	for weapon in selected_weapons:
 		if weapon_slot_index < weapon_icons.size():
 			if weapon_icons[weapon_slot_index].texture == null:
 				weapon_icons[weapon_slot_index].texture = weapon["icon"]
 				weapon_slot_index += 1
 
-	# Update stat icons
 	for stat in selected_stats:
 		if stat_slot_index < stat_icons.size():
 			if stat_icons[stat_slot_index].texture == null:

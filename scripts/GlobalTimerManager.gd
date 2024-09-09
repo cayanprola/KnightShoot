@@ -4,9 +4,9 @@ var game_timer: Timer
 var time_left: float = 600  # 10 minutes in seconds
 var weapon_timers: Dictionary = {}
 var shuriken_timer: Timer = null
-var shuriken_active = false  # To track the shuriken's current state
+var shuriken_active = false
 var fireball_timer: Timer = null
-var fireball_active = false  # To track the fireball's current state
+var fireball_active = false
 var spawn_timer: Timer = null
 var is_paused: bool = false
 
@@ -24,13 +24,13 @@ signal shuriken_timeout()
 func _ready():
 	shuriken_timer = Timer.new()
 	shuriken_timer.wait_time = 5.0  # Set the interval for 5 seconds
-	shuriken_timer.one_shot = false  # Make it repeat
+	shuriken_timer.one_shot = false
 	shuriken_timer.connect("timeout", Callable(self, "_on_ShurikenTimer_timeout"))
 	add_child(shuriken_timer)  # Add the timer to the scene tree
 
 	fireball_timer = Timer.new()
-	fireball_timer.wait_time = 5.0  # Set the interval for 5 seconds (adjust as necessary)
-	fireball_timer.one_shot = false  # Make it repeat
+	fireball_timer.wait_time = 5.0
+	fireball_timer.one_shot = false
 	fireball_timer.connect("timeout", Callable(self, "_on_FireballTimer_timeout"))
 	add_child(fireball_timer)  # Add the timer to the scene tree
 	
@@ -46,7 +46,7 @@ func start_game_timer(duration: float):
 		game_timer.queue_free()  # Remove any existing game timer
 	game_timer = Timer.new()
 	game_timer.one_shot = false
-	game_timer.wait_time = 1.0  # Trigger every second
+	game_timer.wait_time = 1.0
 	game_timer.connect("timeout", Callable(self, "_on_game_timer_timeout"))
 	add_child(game_timer)
 	game_timer.start()
@@ -61,6 +61,7 @@ func _on_game_timer_timeout():
 			game_node._end_game()
 		game_timer.stop()
 
+#Star a timer, used for the knife lifetime
 func start_weapon_timer(weapon_id: int, lifetime: float) -> void:
 	if weapon_timers.has(weapon_id):
 		return
@@ -106,11 +107,11 @@ func _on_FireballTimer_timeout():
 		fireball_active = false
 	else:
 		fireball_active = true
-		emit_signal("fireball_timeout", fireball_active)  # Pass the state to the player
+		emit_signal("fireball_timeout", fireball_active)
 
 func _on_ShurikenTimer_timeout():
-	shuriken_active = not shuriken_active  # Toggle the state of the shuriken
-	emit_signal("shuriken_timeout", shuriken_active)  # Pass the state to the player
+	shuriken_active = not shuriken_active
+	emit_signal("shuriken_timeout", shuriken_active)
 
 func stop_shuriken_timer():
 	if shuriken_timer:
@@ -127,7 +128,7 @@ func pause_spawn():
 
 func resume_spawn():
 	is_paused = false
-	spawn_item_randomly()  # Start spawning items again
+	spawn_item_randomly()
 
 func spawn_item_randomly():
 	if is_paused:
@@ -137,7 +138,7 @@ func spawn_item_randomly():
 	spawn_timer.start(random_time)
 
 	if is_paused:
-		return  # Check again after the timer to see if we're still paused
+		return  # Check again after the timer to see if still paused
 
 	var item = _get_random_item()
 	if item:

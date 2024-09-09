@@ -97,6 +97,7 @@ func _physics_process(delta):
 	_handle_shooting(delta)
 	_handle_shurikens(delta)
 
+# Update state to handle animations
 func _update_state():
 	if is_hit:
 		animated_sprite.play("Hit")
@@ -106,6 +107,7 @@ func _update_state():
 		else:
 			animated_sprite.play("Idle")
 
+# Apply permanent upgrades if the player has any
 func apply_permanent_upgrades():
 	max_health = 100 + perm_upgrades.max_health * 20
 	health_regen += perm_upgrades.health_regen * 0.2
@@ -118,6 +120,7 @@ func apply_permanent_upgrades():
 	health_bar.set_max_health(max_health)
 	health = min(health, max_health)
 
+#Handle shooting of weapon except shuriken because it spawns, reduces the time using atk speed value
 func _handle_shooting(delta):
 	shoot_timer -= delta
 	fireball_timer -= delta
@@ -125,28 +128,27 @@ func _handle_shooting(delta):
 
 	if shoot_timer <= 0:
 		shoot_timer = max(0.7, 1.5 / (0.5 + atk_speed ))  # Reduce time between shots with higher attack speed
-		_shoot()
+		_shoot_laser()
 		print("Atk speed laser timer ", atk_speed, " laser timer ", shoot_timer) 
 
 	if fireball_active and fireball_level > 0 and fireball_timer <= 0:
-		fireball_timer = max(0.9, 3.5 / (0.5 + atk_speed))  # Reduce time between fireballs with higher attack speed
+		fireball_timer = max(0.9, 3.5 / (0.5 + atk_speed))
 		_shoot_fireball()
 		print("Atk speed fireball timer ", atk_speed, " fireball timer ", fireball_timer) 
 
-	# Continuous knife shooting
 	if knife_level > 0 and knife_timer <= 0:
 		knife_timer = max(0.8, 4 / (0.5 + atk_speed))
 		_shoot_knives()
 		print("Atk speed knife timer ", atk_speed, " knife timer ", knife_timer) 
 		
-
+#Used to spawn shuriken
 func _handle_shurikens(delta):
 	if shuriken_active and shuriken_level > 0:
 		_rotate_shurikens(delta)
 	else:
 		_deactivate_shurikens()
 
-func _shoot():
+func _shoot_laser():
 	var directions = [Vector2(1, 0)]
 	
 	# Add additional directions based on the purple laser level
@@ -198,7 +200,7 @@ func _shoot():
 		laser_instance.laser_direction = direction  # Set the direction based on the level
 		get_parent().add_child(laser_instance)
 
-
+#Get enemy for fireball
 func _get_random_enemy() -> Node2D:
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	if enemies.size() > 0:
@@ -253,11 +255,12 @@ func _on_animation_finished():
 
 func resurrect():
 	is_dead = false
-	health = max_health  # Reset health or any other relevant properties
+	health = max_health  # Reset health
 	health_bar.set_health(health)
 	animated_sprite.play("Idle")
 	set_process(true)
 
+#Handle colisions
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("enemies"):
 		_take_damage(20)
@@ -281,15 +284,16 @@ func _regenerate_health(delta):
 func level_up_player():
 	player_lvl += 1
 	experience -= experience_next_lvl
-	experience_next_lvl += 70  # Example increment, adjust as needed
+	experience_next_lvl += 70
 
-	# Update the XP bar to reflect the new level's requirement
+	# Update the XP bar to reflect the new levels requirement
 	xp_bar.max_value = experience_next_lvl
 	xp_bar.value = experience  # Ensure the XP bar reflects the remaining XP after leveling up
 
 	health = min(max_health, health + 20)
 	health_bar.set_health(health)
 
+#Gives gold if max level
 	print("Checking if all upgrades are maxed out...")
 	if all_upgrades_maxed_out():
 		print("All upgrades are maxed out. Adding gold...")
@@ -406,7 +410,7 @@ func get_available_options() -> Array:
 				"description": upgrade_manager.get_description(selected_stat["name"], level)
 			})
 
-	# If there are available slots, add new upgrade options
+	# If there are available slots, add new upgrade options for weapon and stats
 	if selected_weapons.size() < max_weapons:
 		for weapon in weapon_options.keys():
 			if not selected_weapons.has({"name": weapon, "icon": weapon_options[weapon]}):
@@ -446,6 +450,7 @@ func get_available_options() -> Array:
 
 	return options
 
+#Utilized to apply the correct upgrades
 func upgrade_stat(upgrade_name: String):
 	print("Upgrading:", upgrade_name)
 	
@@ -496,8 +501,8 @@ func upgrade_stat(upgrade_name: String):
 				print("Added stat:", upgrade_name)
 
 	# Print current state after selection
-	print("Selected Weapons After Upgrade:", selected_weapons)
-	print("Selected Stats After Upgrade:", selected_stats)
+	print("Selected Weapons After Upgrade: ", selected_weapons)
+	print("Selected Stats After Upgrade: ", selected_stats)
 
 	# Only update the HUD if this is a new selection
 	if is_new_selection:
@@ -548,7 +553,7 @@ func upgrade_stat(upgrade_name: String):
 	if get_upgrade_level(upgrade_name) >= max_level:
 		print(upgrade_name + " is now maxed out.")
 
-
+# Control activation of fireball and shuriken and checking to clear them
 func _toggle_fireball(active: bool):
 	fireball_active = active
 	if not active:
@@ -561,7 +566,6 @@ func _toggle_shuriken(active: bool):
 	shuriken_active = active
 	if shuriken_active:
 		_spawn_shurikens()
-		
 	else:
 		_deactivate_shurikens()
 
@@ -595,9 +599,10 @@ func apply_shuriken_upgrades():
 			_spawn_single_shuriken(PI * 2 / 3)  # Second shuriken, 120 degrees apart
 			_spawn_single_shuriken(4 * PI / 3)  # Third shuriken, 240 degrees apart
 
+#Used to spawn the shurikens
 func _spawn_shurikens():
 	_deactivate_shurikens()  # Remove any existing shurikens
-	var shuriken_count = min(shuriken_level, 5)  # Maximum of 3 shurikens at level 5
+	var shuriken_count = shuriken_level  # Increase count based on level
 
 	for i in range(shuriken_count):
 		var angle_offset = i * (PI * 2 / shuriken_count)
@@ -611,13 +616,12 @@ func _spawn_single_shuriken(angle_offset: float):
 	shuriken.position = orbit_position
 	
 	# Set additional properties
-	shuriken.shuriken_damage += player_dmg  # Set shuriken damage based on player damage
+	shuriken.shuriken_damage += player_dmg
 	shuriken.shuriken_angle = angle_offset
 	shuriken.scale = Vector2(atk_size, atk_size)
 	
 	shuriken.shuriken_rotation_speed = shuriken_rotation_speed
 	
-	# Add shuriken as a child of the player
 	add_child(shuriken)
 	print("Shuriken damage: ", shuriken.shuriken_damage)
 	
@@ -636,10 +640,10 @@ func _rotate_shurikens(delta):
 		else:
 			# If the shuriken is not valid, remove it from the list
 			shurikens.remove_at(i)
-			shuriken_angles.remove_at(i)  # Do not increment i here
+			shuriken_angles.remove_at(i)
 
 func _shoot_knives():
-	var knife_count = knife_level  # Number of knives is directly related to the knife level
+	var knife_count = knife_level  # Increase count based on level
 	var base_angle = randf() * PI * 2  # Start at a random angle
 
 	for i in range(knife_count):
@@ -674,7 +678,6 @@ func _shoot_fireball():
 			print("Fireball damage:", fireball_instance.fireball_damage, " Fireball speed:", fireball_instance.fireball_speed)
 			get_parent().add_child(fireball_instance)
 			fireball.append(fireball_instance)
-
 
 func apply_fireball_upgrades():
 	match fireball_level:

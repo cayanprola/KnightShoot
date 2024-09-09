@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-# Signal to notify the game about the player's choice
+# Signal to notify the game about the players choice
 signal revive_selected(revived: bool)
 
 func _ready():
-	hide()  # Hide the HUD initially
+	hide()
 	$ReviveHUD/PanelContainer/VBoxContainer/Revive.connect("pressed", Callable(self, "_on_ReviveButton_pressed"))
 	$ReviveHUD/PanelContainer/VBoxContainer/Quit.connect("pressed", Callable(self, "_on_QuitButton_pressed"))
 

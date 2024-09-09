@@ -4,6 +4,7 @@ var bg_image_1440x900 = load("res://assets/Bg/Space Background1440x900.png")
 var bg_image_1920x1080 = load("res://assets/Bg/Space Background1920x1080.png")
 var bg_image_2560x1440 = load("res://assets/Bg/Space Background2560x1440.png")
 
+# Apply bg based on resolution
 func set_background(texture_rect: TextureRect):
 	var resolution = DisplayServer.window_get_size()
 	print("Current Resolution: ", resolution)

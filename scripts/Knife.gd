@@ -2,7 +2,7 @@ extends "res://scripts/BaseWeapon.gd"
 
 @export var knife_damage = 10
 @export var knife_speed = 400
-@export var knife_direction = Vector2(1, 0)  # Default direction is right
+@export var knife_direction = Vector2(1, 0)
 var has_bounced = false  # Track if the knife has already bounced
 
 func _ready():

@@ -18,5 +18,5 @@ func _on_Options_pressed():
 	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
 
 func _on_Exit_pressed():
-	perm_upgrades.save_game()  # Save the game before exiting
+	perm_upgrades.save_game()
 	get_tree().quit()

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var xp_value = 10  # XP value of this gem
+@export var xp_value = 10  # XP value for gems
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))

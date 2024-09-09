@@ -26,14 +26,13 @@ func _physics_process(delta):
 		return
 
 	if player:
-		# Calculate direction towards the player
 		var direction = global_position.direction_to(player.global_position)
 		
 		# Apply a small random offset to avoid mobs clustering in a single line
 		var jitter = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 10
 		velocity = direction * 120 + jitter
 
-		# Apply a simple avoidance mechanism
+		# Apply an avoidance mechanism
 		velocity += _avoidance()
 
 		move_and_slide()
@@ -43,6 +42,7 @@ func _physics_process(delta):
 			animated_sprite.play("Walk")
 	else:
 		print("Player node not found!")
+
 
 func _avoidance() -> Vector2:
 	var mobs = get_tree().get_nodes_in_group("enemies")
@@ -54,7 +54,7 @@ func _avoidance() -> Vector2:
 			if distance < separation_radius:  # Only consider nearby mobs
 				avoidance += (global_position - mob.global_position).normalized() / distance
 
-	# Normalize and scale the avoidance vector to keep it effective
+	# Normalize and scale the avoidance vecto
 	return avoidance.normalized() * 50
 
 func take_damage(amount):

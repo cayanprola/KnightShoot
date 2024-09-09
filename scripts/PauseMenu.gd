@@ -1,13 +1,13 @@
 extends CanvasLayer
 
-@onready var settings_panel: Control = $SettingsPanel  # Adjust the path if necessary
-@onready var pause_control = $PauseControl # The container for pause menu buttons
+@onready var settings_panel: Control = $SettingsPanel
+@onready var pause_control = $PauseControl 
 
 func _ready():
 	self.hide()
 	settings_panel.hide()
 	
-	# Connect to the SettingsPanel's return signal
+	# Connect to SettingsPanel return signal
 	settings_panel.connect("return_to_parent", Callable(self, "_on_SettingsPanel_returned"))
 
 func show_pause_menu():
@@ -25,7 +25,7 @@ func _on_Continue_pressed():
 	hide_pause_menu()
 
 func _on_Settings_pressed():
-	# Hide the pause menu controls and show the SettingsPanel
+	# Hide the pause menu control and show SettingsPanel
 	pause_control.hide()
 	settings_panel.show()
 	settings_panel.set_focus_mode(Control.FOCUS_ALL)
@@ -37,6 +37,6 @@ func _on_Quit_pressed():
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
 func _on_SettingsPanel_returned():
-	# Handle the return action from the SettingsPanel
+	# Handle the return action from SettingsPanel
 	settings_panel.hide()
 	pause_control.show()

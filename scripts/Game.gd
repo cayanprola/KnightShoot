@@ -32,7 +32,7 @@ func _ready():
 	levelling_hud.connect("option_selected", Callable(self, "_on_option_selected"))
 	update_gold_display()
 	
-	levelling_hud.skips_remaining = levelling_hud.max_skips 
+	levelling_hud.skips_remaining = levelling_hud.max_skips
 	levelling_hud.update_skip_label()
 	
 	inactivity_timer = Timer.new()
@@ -65,6 +65,7 @@ func _on_game_timer_timeout():
 	if time_left <= 0:
 		_end_game()
 
+# Update timer label to game duration
 func _update_timer_label():
 	time_left = GlobalTimer.get_time_left()
 	var minutes = int(time_left / 60)
@@ -82,7 +83,7 @@ func _end_game():
 	_add_run_gold_to_permanent()
 	perm_upgrades.save_game()
 
-	# Stop all game processes
+	# Stop all game processes and timers
 	GlobalTimer.pause_game_timer()
 	GlobalTimer.stop_shuriken_timer()
 	GlobalTimer.stop_fireball_timer()
@@ -118,6 +119,7 @@ func _input(event):
 			#Engine.time_scale = 1.0  # Reset to normal speed
 			#print("Game speed reset to normal")
 
+# Used to pause the game with esc
 func _pause_game():
 	_show_cursor()
 	if pause_menu_instance == null:
@@ -140,6 +142,7 @@ func _resume_game():
 	GlobalTimer.start_fireball_timer()
 	GlobalTimer.start_shuriken_timer()
 
+# Maintain pause and revive menu instantiaded for simplicity
 func _setup_pause_menu():
 	if pause_menu_instance == null:
 		pause_menu_instance = pause_menu_scene.instantiate() as CanvasLayer
@@ -154,17 +157,18 @@ func _setup_revive_hud():
 
 func show_revive_hud():
 	_show_cursor()
-	get_tree().paused = true  # Pause the game
+	get_tree().paused = true
 	GlobalTimer.pause_game_timer()
 	GlobalTimer.pause_spawn()
 	revive_hud_instance.show_hud()
 
+# Handle revive
 func _on_revive_selected(revived: bool):
 	if revived:
 		print("Reviving player")
 		player.handle_revive()
 		revive_hud_instance.hide_hud()
-		_resume_game()  # Resume the game after reviving
+		_resume_game()
 	else:
 		print("Player chose not to revive")
 		revive_hud_instance.hide_hud()

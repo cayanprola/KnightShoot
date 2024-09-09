@@ -3,7 +3,7 @@ extends CanvasLayer
 signal option_selected(option: Dictionary)
 signal skip_selected()
 
-@export var max_skips = 3  # Maximum number of skips allowed
+@export var max_skips = 3
 @onready var options_container = $Control/PanelContainer/VBoxContainer/OptionsContainer
 @onready var skip_button = $Control/PanelContainer/Control/MarginContainer/VBoxContainer/Skip
 @onready var level_up_label = $Control/PanelContainer/VBoxContainer/MarginContainer/LevelUpLabel
@@ -27,6 +27,7 @@ func show_hud(options: Array):
 		_pause_game_manually()
 		show()
 
+# Populate options with the description and the options
 func populate_options():
 	for child in options_container.get_children():
 		child.queue_free()
@@ -42,7 +43,6 @@ func populate_options():
 func _on_option_selected(option_data):
 	emit_signal("option_selected", option_data)
 	
-	# Hide the levelling HUD and resume the game
 	hide()
 	_resume_game_manually()
 
@@ -56,7 +56,6 @@ func _on_skip_button_pressed():
 
 	emit_signal("skip_selected")
 	
-	# Hide the levelling HUD and resume the game
 	hide()
 	_resume_game_manually()
 

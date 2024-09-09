@@ -29,13 +29,13 @@ var upgrade_icons = {
 func _ready():
 	BackgroundManager.set_background($TextureRect)
 	
-	# Initially hide the description panel
+	# initially hide the description panel
 	description_panel.hide()
 
-	# Load the game data (ensure this is done before updating the HUD)
+	# load the game data before the hud
 	perm_upgrades.load_game()
 
-	# Update the HUD to reflect the loaded data
+	# Update hud to reflect the loaded data
 	update_upgrade_display("max_health", perm_upgrades.max_health)
 	update_upgrade_display("health_regen", perm_upgrades.health_regen)
 	update_upgrade_display("armor", perm_upgrades.armor)
@@ -48,16 +48,16 @@ func _ready():
 	# Update initial gold display
 	update_gold_display()
 
-	# Connect click signals for each upgrade panel
+	# connect click signals for each upgrade panel
 	connect_upgrade_panel_signals()
 
-	# Connect buttons
+	# connect buttons
 	refund_button.connect("pressed", Callable(self, "_on_refund_button_pressed"))
 	return_button.connect("pressed", Callable(self, "_on_BackButton_pressed"))
 	buy_button.connect("pressed", Callable(self, "_on_buy_button_pressed"))
 
+# Connect click signals for each upgrade panel
 func connect_upgrade_panel_signals():
-	# Connect click signals for each upgrade panel
 	connect_click_signals($VBoxContainer/FlowContainer/HealthPanel, "max_health")
 	connect_click_signals($VBoxContainer/FlowContainer/HealthRegenPanel, "health_regen")
 	connect_click_signals($VBoxContainer/FlowContainer/ArmorPanel, "armor")
@@ -81,10 +81,10 @@ func _on_upgrade_panel_clicked(event: InputEvent, upgrade_name: String):
 			var price = get_upgrade_price(upgrade_name)
 			if price == -1:
 				upgrade_price.text = "Maxed"
-				coin_text.hide()  # Hide the coin text if the upgrade is maxed out
+				coin_text.hide()
 			else:
 				upgrade_price.text = str(price)
-				coin_text.show()  # Show the coin text if the upgrade is not maxed out
+				coin_text.show()
 			
 			upgrade_icon.texture = upgrade_icons[upgrade_name]
 			description_panel.show()
@@ -105,7 +105,7 @@ func _on_buy_button_pressed():
 		update_gold_display()
 
 func get_upgrade_display_name(upgrade_name: String) -> String:
-	# Return a more readable name for the upgrade
+	# Format names to UI
 	match upgrade_name:
 		"max_health":
 			return "Max Health"
@@ -157,7 +157,6 @@ func get_upgrade_price(upgrade_name: String) -> int:
 	if current_level >= max_level:
 		return -1
 	
-	# Define base prices and scaling factors
 	var base_prices = {
 		"max_health": 100,
 		"health_regen": 100,
@@ -226,7 +225,6 @@ func apply_upgrades_to_player():
 	var player = get_tree().get_root().get_node("Menu/Game/Player")
 	if player:
 		player.apply_permanent_upgrades()
-	# Else the print statement is suppressed to prevent console clutter
 
 func _on_BackButton_pressed():
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

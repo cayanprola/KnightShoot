@@ -19,85 +19,86 @@ func _ready():
 			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 30 },
 			"spawn_interval": 1,
 			"max_wave_mobs": 250,
-			"max_mobs": 600,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Crow.tscn")],
 			"mob_health": { preload("res://scenes/Crow.tscn"): 60 },
-			"spawn_interval": 0.35,
-			"max_wave_mobs": 300,
-			"max_mobs": 350,
+			"spawn_interval": 0.5,
+			"max_wave_mobs": 250,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Orc.tscn")],
-			"mob_health": { preload("res://scenes/Orc.tscn"): 140 },
-			"spawn_interval": 0.4,
+			"mob_health": { preload("res://scenes/Orc.tscn"): 120 },
+			"spawn_interval": 0.3,
 			"max_wave_mobs": 300,
-			"max_mobs": 400,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Necromancer.tscn")],
-			"mob_health": { preload("res://scenes/Necromancer.tscn"): 250 },
+			"mob_health": { preload("res://scenes/Necromancer.tscn"): 160 },
 			"spawn_interval": 0.5,
-			"max_wave_mobs": 300,
-			"max_mobs": 1000,
+			"max_wave_mobs": 200,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/FlyingEye.tscn")],
 			"mob_health": { preload("res://scenes/FlyingEye.tscn"): 50 },
-			"spawn_interval": 0.10,
-			"max_wave_mobs": 700,
-			"max_mobs": 1000,
+			"spawn_interval": 0.3,
+			"max_wave_mobs": 400,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Skeleton.tscn")],
 			"mob_health": { preload("res://scenes/Skeleton.tscn"): 160 },
-			"spawn_interval": 0.3,
+			"spawn_interval": 0.4,
 			"max_wave_mobs": 300,
-			"max_mobs": 600,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Crow.tscn")],
 			"mob_health": { preload("res://scenes/Crow.tscn"): 160 },
-			"spawn_interval": 0.2,
+			"spawn_interval": 0.25,
 			"max_wave_mobs": 500,
-			"max_mobs": 600,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Mushroom.tscn")],
 			"mob_health": { preload("res://scenes/Mushroom.tscn"): 120 },
-			"spawn_interval": 0.05,
-			"max_wave_mobs": 500,
-			"max_mobs": 600,
+			"spawn_interval": 0.25,
+			"max_wave_mobs": 300,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/Orc.tscn")],
 			"mob_health": { preload("res://scenes/Orc.tscn"):120 },
-			"spawn_interval": 0.1,
+			"spawn_interval": 0.2,
 			"max_wave_mobs": 400,
-			"max_mobs": 600,
+			"max_mobs": 230,
 			"duration": 60
 		},
 		{
 			"mobs": [preload("res://scenes/OldGuardian.tscn")],
-			"mob_health": { preload("res://scenes/OldGuardian.tscn"): 800 },
-			"spawn_interval": 0.3,
+			"mob_health": { preload("res://scenes/OldGuardian.tscn"): 450 },
+			"spawn_interval": 0.4,
 			"max_wave_mobs": 300,
-			"max_mobs": 600,
+			"max_mobs": 230,
 			"duration": 100
 		},
 	]
 
 	start_next_wave()
 
+# Stars the wave with the corect data if there are waves to be spawned
 func start_next_wave():
 	if current_wave_index < waves.size():
 		var wave_data = waves[current_wave_index]

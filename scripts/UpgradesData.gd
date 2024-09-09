@@ -1,6 +1,6 @@
 extends Node
 
-# Player's permanent upgrades and their max levels
+# Players permanent upgrades and max levels
 var max_health = 0
 var max_health_max = 5
 
@@ -30,11 +30,11 @@ var gold = 0
 # Settings variables
 var resolution_index = 3  # Default to 1920x1080
 var screen_mode_index = 0  # Default to Fullscreen
-var volume = 50  # Default volume
+var volume = 50  # Default volumes
 var weapons_volume = 50
 var music_volume = 50
 
-# Path to save the file
+
 var save_path = "user://save_game.json"
 
 # Resolutions and screen modes for reference
@@ -80,12 +80,11 @@ func save_game():
 		print("Error saving game!")
 
 func load_game():
-	print("Attempting to load game...")  # Debug print to indicate the function is called
 	var file = FileAccess.open(save_path, FileAccess.ModeFlags.READ)
 	if file:
 		print("File opened successfully.")
 		var file_content = file.get_as_text()
-		print("File content: ", file_content)  # Print the raw file content to see what is in the file
+		print("File content: ", file_content)  # Print the raw file content to see whats in the file
 
 		var save_data = JSON.parse_string(file_content)
 
@@ -93,7 +92,7 @@ func load_game():
 
 		# Ensure that save_data is a dictionary
 		if typeof(save_data) == TYPE_DICTIONARY:
-			print("Save data parsed successfully.")  # Debug print to confirm JSON parsing
+			print("Save data parsed successfully.")
 			max_health = save_data.get("max_health", 0)
 			health_regen = save_data.get("health_regen", 0)
 			armor = save_data.get("armor", 0)
@@ -126,7 +125,7 @@ func refund_upgrades():
 	refund_amount += calculate_refund_amount("move_speed", move_speed)
 	refund_amount += calculate_refund_amount("revive", revive)
 
-	# Reset upgrades
+# Reset upgrades
 	max_health = 0
 	health_regen = 0
 	armor = 0
@@ -136,7 +135,7 @@ func refund_upgrades():
 	move_speed = 0
 	revive = 0
 
-	# Refund the calculated gold
+# Reset gold
 	gold += refund_amount
 	save_game()
 	return refund_amount
@@ -170,9 +169,9 @@ func calculate_refund_amount(upgrade_type: String, level: int) -> int:
 	
 	return total_refund
 
-
+# apply settings when the game loads
 func apply_settings():
-	# Apply screen mode first
+	# Apply screen mode
 	match screen_mode_index:
 		0:  # Fullscreen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
@@ -181,22 +180,23 @@ func apply_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			print("Set to Windowed mode")
 
-	# Apply resolution after setting the screen mode
+	# Apply resolution
 	var selected_resolution = resolutions[resolution_index]
 	DisplayServer.window_set_size(selected_resolution)
 	print("Resolution set to: ", selected_resolution)
 
-	# Apply volume for each bus
+	
 	_apply_volume_to_bus("Master", volume)
 	_apply_volume_to_bus("WeaponsBus", weapons_volume)
 	_apply_volume_to_bus("MusicBus", music_volume)
 
-	# Print current window size and mode for debugging
+	# Debug prints
 	var current_size = DisplayServer.window_get_size()
 	var current_mode = DisplayServer.window_get_mode()
 	print("Current window size: ", current_size)
 	print("Current window mode: ", current_mode)
-
+	
+# Apply volume for audio bus
 func _apply_volume_to_bus(bus_name: String, volume_value: float):
 	var db_value = lerp(-50.0, 10.0, volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), db_value)

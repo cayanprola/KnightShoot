@@ -3,9 +3,9 @@ extends "res://scripts/BaseWeapon.gd"
 @export var fireball_damage = 30
 @export var fireball_speed = 300
 @export var fireball_lifetime = 3.0  # Fireball lasts 3 seconds
-var fireball_direction = Vector2(1, 0)  # Default direction is right
+var fireball_direction = Vector2(1, 0)
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D  # Ensure this node exists in your fireball scene
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var lifetime_timer: Timer = Timer.new()
 
 func _ready():
@@ -23,7 +23,6 @@ func _ready():
 	lifetime_timer.start()
 
 func _physics_process(delta):
-	# Move the fireball in the assigned direction
 	global_position += fireball_direction * fireball_speed * delta
 	if is_outside_screen():
 		remove_weapon()
