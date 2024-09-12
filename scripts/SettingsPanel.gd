@@ -95,15 +95,15 @@ func _apply_resolution():
 
 func _apply_volume():
 	var master_volume_value = master_volume_slider.value
-	var db_value = lerp(-50.0, 10.0, master_volume_value / 100.0)
+	var db_value = lerp(-80.0, 20.0, master_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db_value)
 
 	var weapons_volume_value = weapons_volume_slider.value
-	var weapons_db_value = lerp(-50.0, 10.0, weapons_volume_value / 100.0)
+	var weapons_db_value = lerp(-40.0, 30.0, weapons_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("WeaponsBus"), weapons_db_value)
 	
 	var music_volume_value = music_volume_slider.value
-	var music_db_value = lerp(-50.0, 10.0, music_volume_value / 100.0)
+	var music_db_value = lerp(-60.0, 20.0, music_volume_value / 100.0)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("MusicBus"), music_db_value)
 	
 	
