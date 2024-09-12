@@ -84,4 +84,4 @@ toggle_speed={
 
 [rendering]
 
-driver/threads/thread_model=2
+vrs/threads/thread_model=2

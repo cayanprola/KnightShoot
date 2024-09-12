@@ -77,6 +77,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="LevelUpButton" type="Button" parent="GameUI/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
